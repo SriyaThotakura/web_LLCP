@@ -6,11 +6,9 @@
     <title>HearOnly - The Future of Selective Hearing</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.min.js"></script>
-    <script src="https://unpkg.com/react-intersection-observer@9/dist/react-intersection-observer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="./css/tailwind.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>">
     <style>
         * {
@@ -86,8 +84,12 @@
             border-radius: inherit;
             padding: 2px;
             background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
             mask-composite: exclude;
             z-index: -1;
             opacity: 0;
@@ -121,15 +123,24 @@
             scroll-margin-top: 80px;
         }
         
-        /* Add any additional styles from the original file */
+        /* Fix mask compatibility */
+        .tech-glow::before {
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <div id="root"></div>
 
-    <script type="text/babel">
+    <!-- Load components first -->
+    <script src="./js/components.js"></script>
+    
+    <script type="text/babel" data-type="module">
         const { useState, useEffect, useRef } = React;
-
+        
         // Dark mode context
         const DarkModeContext = React.createContext();
         
@@ -400,7 +411,24 @@
         // ...
 
         // Render the app
-        ReactDOM.render(<App />, document.getElementById('root'));
+        ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+    </script>
+    
+    <!-- Load Babel for development only -->
+    <script>
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            const babelScript = document.createElement('script');
+            babelScript.src = 'https://unpkg.com/@babel/standalone/babel.min.js';
+            document.head.appendChild(babelScript);
+        } else {
+            // In production, we should pre-compile the JSX
+            console.log('Production build - JSX should be pre-compiled');
+        }
     </script>
 </body>
 </html>

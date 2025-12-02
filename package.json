@@ -1,0 +1,13 @@
+{
+  "name": "hearonly",
+  "version": "1.0.0",
+  "description": "HearOnly - AI-powered noise-cancelling headphones",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "tailwindcss": "^3.3.0"
+  }
+}
