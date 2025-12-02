@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HearOnly - The Future of Selective Hearing</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.min.js"></script>
+    <script src="https://unpkg.com/react-intersection-observer@9/dist/react-intersection-observer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .ai-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse-glow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
+            }
+            70% { 
+                box-shadow: 0 0 0 10px rgba(124, 58, 237, 0);
+            }
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-glow {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tech-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tech-glow:hover::before {
+            opacity: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float-particle 10s linear infinite;
+        }
+        
+        @keyframes float-particle {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-100px) translateX(calc(100vw * var(--random-x, 0.5)));
+                opacity: 1;
+            }
+        }
+        
+        .section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Add any additional styles from the original file */
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Dark mode context
+        const DarkModeContext = React.createContext();
+        
+        // Main App Component
+        const App = () => {
+            const [darkMode, setDarkMode] = useState(false);
+            
+            return (
+                <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+                    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-white'}`}>
+                        <Navigation />
+                        <Hero />
+                        <Overview />
+                        <Methodology />
+                        <Team />
+                        <Schedule />
+                        <Marketing />
+                        <Risk />
+                        <Footer />
+                    </div>
+                </DarkModeContext.Provider>
+            );
+        };
+
+        // Navigation Component
+        const Navigation = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const { darkMode, setDarkMode } = React.useContext(DarkModeContext);
+            
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 20);
+                };
+                
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+            
+            const navItems = [
+                { name: 'Overview', href: '#overview' },
+                { name: 'Methodology', href: '#methodology' },
+                { name: 'Team', href: '#team' },
+                { name: 'Schedule', href: '#schedule' },
+                { name: 'Marketing', href: '#marketing' },
+                { name: 'Risk', href: '#risk' }
+            ];
+            
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-20">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 rounded-full gradient-bg pulse-glow"></div>
+                                <span className="text-xl font-bold text-gray-900">HearOnly</span>
+                            </div>
+                            
+                            <div className="hidden md:flex items-center space-x-8">
+                                {navItems.map((item) => (
+                                    <a 
+                                        key={item.name}
+                                        href={item.href}
+                                        className="text-gray-700 hover:text-purple-600 font-medium transition-colors"
+                                    >
+                                        {item.name}
+                                    </a>
+                                ))}
+                                <button 
+                                    onClick={() => setDarkMode(!darkMode)}
+                                    className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                                    aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                                >
+                                    {darkMode ? '🌞' : '🌙'}
+                                </button>
+                            </div>
+                            
+                            <button 
+                                className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                            >
+                                {mobileMenuOpen ? (
+                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                ) : (
+                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {/* Mobile menu */}
+                    {mobileMenuOpen && (
+                        <div className="md:hidden bg-white border-t">
+                            {navItems.map((item) => (
+                                <a 
+                                    key={item.name}
+                                    href={item.href}
+                                    className="block px-4 py-3 text-gray-700 hover:bg-gray-50 font-medium"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {item.name}
+                                </a>
+                            ))}
+                            <div className="p-4 border-t">
+                                <button 
+                                    onClick={() => {
+                                        setDarkMode(!darkMode);
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className="w-full flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-50"
+                                >
+                                    {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        // Hero Section
+        const Hero = () => {
+            const [mounted, setMounted] = useState(false);
+            
+            useEffect(() => {
+                setMounted(true);
+                
+                // Add floating particles
+                const createParticle = () => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    const size = Math.random() * 10 + 5;
+                    Object.assign(particle.style, {
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        left: `${Math.random() * 100}%`,
+                        '--random-x': Math.random(),
+                        animationDuration: `${Math.random() * 10 + 10}s`,
+                        animationDelay: `${Math.random() * 5}s`
+                    });
+                    document.body.appendChild(particle);
+                    
+                    // Remove particle after animation
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 15000);
+                };
+                
+                const particleInterval = setInterval(createParticle, 300);
+                
+                return () => clearInterval(particleInterval);
+            }, []);
+            
+            return (
+                <section className="relative overflow-hidden gradient-bg min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+                    {/* Background elements */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+                        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+                        <div className="absolute bottom-1/4 left-1/2 w-64 h-64 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+                    </div>
+                    
+                    <div className="relative max-w-7xl mx-auto text-center">
+                        <h1 className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                            HearOnly
+                        </h1>
+                        
+                        <p className={`text-3xl md:text-4xl text-white font-light mb-8 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-500`}>
+                            The Future of Selective Hearing
+                        </p>
+                        
+                        <p className={`text-xl text-white max-w-3xl mx-auto mb-12 leading-relaxed ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-700`}>
+                            AI-powered noise-cancelling headphones that go beyond traditional sound blocking,
+                            intelligently filtering and personalizing your auditory environment in real-time.
+                        </p>
+                        
+                        <div className={`flex flex-wrap justify-center gap-4 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-900`}>
+                            <a href="#overview" className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover-scale shadow-lg tech-glow">
+                                Explore Project
+                            </a>
+                            <a href="#team" className="px-8 py-4 glass-effect text-white rounded-full font-semibold hover-scale tech-glow">
+                                Meet the Team
+                            </a>
+                        </div>
+
+                        <div className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-1100`}>
+                            {[
+                                { label: 'Timeline', value: '24 Months' },
+                                { label: 'Budget', value: '$5.5M' },
+                                { label: 'Accuracy', value: '±5%' },
+                                { label: 'Team Size', value: '50+' }
+                            ].map((stat, idx) => (
+                                <div key={idx} className="glass-effect p-6 rounded-2xl hover-scale tech-glow">
+                                    <div className="text-3xl font-bold text-white mb-2 mono-font">{stat.value}</div>
+                                    <div className="text-white text-opacity-80">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Overview Component
+        const Overview = () => {
+            const features = [
+                {
+                    title: 'AI-Driven Intelligence',
+                    description: 'Advanced machine learning algorithms that learn and adapt to your listening preferences',
+                    icon: '🤖'
+                },
+                {
+                    title: 'Real-time Processing',
+                    description: 'Ultra-low latency audio processing for seamless sound adaptation',
+                    icon: '⚡'
+                },
+                {
+                    title: 'Personalized Soundscapes',
+                    description: 'Custom audio profiles that evolve with your environment and preferences',
+                    icon: '🎵'
+                },
+                {
+                    title: 'Seamless Integration',
+                    description: 'Works with all your devices and audio sources',
+                    icon: '🔗'
+                }
+            ];
+            
+            return (
+                <section id="overview" className="py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Project Overview</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                HearOnly revolutionizes personal audio by combining cutting-edge AI with advanced acoustics to create a truly adaptive listening experience.
+                            </p>
+                        </div>
+                        
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                            {features.map((feature, idx) => (
+                                <div key={idx} className="bg-gray-50 p-8 rounded-2xl hover-scale transition-all duration-300">
+                                    <div className="text-4xl mb-4">{feature.icon}</div>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                                    <p className="text-gray-600">{feature.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white text-center">
+                            <h3 className="text-3xl font-bold mb-4">Why HearOnly?</h3>
+                            <p className="text-xl text-white text-opacity-90 max-w-3xl mx-auto">
+                                Traditional noise-cancelling headphones block out all sound or let everything in. 
+                                HearOnly gives you the power to choose exactly what you want to hear, in real-time, 
+                                with unprecedented clarity and precision.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Other components (Methodology, Team, Schedule, Marketing, Risk, Footer) would be defined here
+        // ...
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
