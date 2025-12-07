@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HearOnly - The Future of Selective Hearing</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.min.js"></script>
+    <script src="https://unpkg.com/react-intersection-observer@9/dist/react-intersection-observer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .ai-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Dark mode styles */
+        .dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .dark .bg-white {
+            background-color: #1e293b !important;
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #0f172a !important;
+        }
+        
+        .dark .text-gray-900 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark .text-gray-600 {
+            color: #94a3b8 !important;
+        }
+        
+        .dark .text-gray-700 {
+            color: #cbd5e1 !important;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #334155 !important;
+        }
+        
+        /* Loading animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Typing animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #667eea; }
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #667eea;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+        }
+        
+        /* Particle background */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float-particle 20s infinite linear;
+        }
+        
+        @keyframes float-particle {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Glow effects */
+        .tech-glow {
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3),
+                        0 0 60px rgba(102, 126, 234, 0.1);
+        }
+        
+        .tech-glow:hover {
+            box-shadow: 0 0 40px rgba(102, 126, 234, 0.5),
+                        0 0 80px rgba(102, 126, 234, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Dark mode context
+        const DarkModeContext = React.createContext();
+
+        // Loading component
+        const LoadingSpinner = () => (
+            <div className="flex justify-center items-center h-64">
+                <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
+            </div>
+        );
+
+        // Particle background component
+        const ParticleBackground = () => {
+            const particlesRef = useRef(null);
+            
+            useEffect(() => {
+                const particles = particlesRef.current;
+                if (!particles) return;
+                
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                    particles.appendChild(particle);
+                }
+            }, []);
+            
+            return <div ref={particlesRef} className="particles"></div>;
+        };
+
+        // Navigation Component with dark mode toggle
+        const Navigation = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [darkMode, setDarkMode] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            useEffect(() => {
+                if (darkMode) {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const navItems = [
+                { name: 'Overview', href: '#overview' },
+                { name: 'Methodology', href: '#methodology' },
+                { name: 'Team', href: '#team' },
+                { name: 'Schedule', href: '#schedule' },
+                { name: 'Marketing', href: '#marketing' },
+                { name: 'Risk', href: '#risk' }
+            ];
+
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-20">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 rounded-full gradient-bg pulse-glow"></div>
+                                <span className={`text-2xl font-bold ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+                                    HearOnly
+                                </span>
+                            </div>
+                            
+                            <div className="hidden md:flex items-center space-x-8">
+                                {navItems.map(item => (
+                                    <a 
+                                        key={item.name}
+                                        href={item.href} 
+                                        className={`nav-link ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-purple-600 font-medium`}
+                                    >
+                                        {item.name}
+                                    </a>
+                                ))}
+                                <button
+                                    onClick={() => setDarkMode(!darkMode)}
+                                    className={`p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white hover:bg-opacity-20'}`}
+                                    aria-label="Toggle dark mode"
+                                >
+                                    {darkMode ? (
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                    ) : (
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+
+                            <button 
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                className="md:hidden"
+                            >
+                                <svg className={`w-6 h-6 ${scrolled ? 'text-gray-900' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                            
+                            <button
+                                onClick={() => setDarkMode(!darkMode)}
+                                className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white hover:bg-opacity-20'}`}
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    {mobileMenuOpen && (
+                        <div className="md:hidden bg-white border-t">
+                            {navItems.map(item => (
+                                <a 
+                                    key={item.name}
+                                    href={item.href} 
+                                    className="block px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {item.name}
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        // Hero Section with enhanced tech effects
+        const Hero = () => {
+            const [mounted, setMounted] = useState(false);
+            
+            useEffect(() => {
+                setMounted(true);
+            }, []);
+
+            return (
+                <div className="relative gradient-bg min-h-screen flex items-center justify-center overflow-hidden">
+                    <ParticleBackground />
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 float-animation"></div>
+                        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 float-animation" style={{animationDelay: '2s'}}></div>
+                    </div>
+                    
+                    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <div className="space-y-8">
+                            <div className={`inline-block px-4 py-2 bg-white bg-opacity-20 rounded-full text-white text-sm font-semibold mb-4 ${mounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
+                                Columbia University - Blue Team, Fall 2025
+                            </div>
+                            
+                            <h1 className={`text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight ${mounted ? 'typing-effect' : ''}`}>
+                                HearOnly
+                            </h1>
+                            
+                            <p className={`text-3xl md:text-4xl text-white font-light mb-8 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-500`}>
+                                The Future of Selective Hearing
+                            </p>
+                            
+                            <p className={`text-xl text-white max-w-3xl mx-auto mb-12 leading-relaxed ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-700`}>
+                                AI-powered noise-cancelling headphones that go beyond traditional sound blocking,
+                                intelligently filtering and personalizing your auditory environment in real-time.
+                            </p>
+                            
+                            <div className={`flex flex-wrap justify-center gap-4 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-900`}>
+                                <a href="#overview" className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover-scale shadow-lg tech-glow">
+                                    Explore Project
+                                </a>
+                                <a href="#team" className="px-8 py-4 glass-effect text-white rounded-full font-semibold hover-scale tech-glow">
+                                    Meet the Team
+                                </a>
+                            </div>
+
+                            <div className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-1000 delay-1100`}>
+                                {[
+                                    { label: 'Timeline', value: '24 Months' },
+                                    { label: 'Budget', value: '$5.5M' },
+                                    { label: 'Accuracy', value: '±5%' },
+                                    { label: 'Team Size', value: '50+' }
+                                ].map((stat, idx) => (
+                                    <div key={idx} className="glass-effect p-6 rounded-2xl hover-scale tech-glow">
+                                        <div className="text-3xl font-bold text-white mb-2 mono-font">{stat.value}</div>
+                                        <div className="text-white text-opacity-80">{stat.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                        <svg className="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </div>
+                </div>
+            );
+        };
+
+        // Project Overview Section
+        const Overview = () => {
+            const features = [
+                {
+                    title: 'AI-Driven Intelligence',
+                    description: 'Advanced machine learning algorithms that learn and adapt to your listening preferences',
+                    icon: '🤖'
+                },
+                {
+                    title: 'Selective Filtering',
+                    description: 'Choose what to hear and what to filter out with unprecedented precision',
+                    icon: '🎯'
+                },
+                {
+                    title: 'Real-Time Adaptation',
+                    description: 'Continuously adjusts to your environment for optimal audio experience',
+                    icon: '⚡'
+                },
+                {
+                    title: 'Wellness Focus',
+                    description: 'Designed to reduce cognitive load and improve focus in noisy environments',
+                    icon: '🧘'
+                }
+            ];
+
+            return (
+                <section id="overview" className="section py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Project Overview</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Transforming the personal audio experience through intelligent sound recognition 
+                                and adaptive filtering technology
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-12 mb-16">
+                            <div className="space-y-6">
+                                <h3 className="text-3xl font-bold text-gray-900">The Challenge</h3>
+                                <p className="text-gray-600 leading-relaxed">
+                                    In an increasingly noisy world, traditional noise-cancelling headphones offer only 
+                                    a binary solution: all sound or no sound. This limitation affects productivity, 
+                                    well-being, and our ability to selectively engage with our auditory environment.
+                                </p>
+                                <p className="text-gray-600 leading-relaxed">
+                                    HearOnly emerged from a simple question asked during a noisy study session at 
+                                    Columbia's Butler Library: "What if headphones could choose what to block?"
+                                </p>
+                            </div>
+
+                            <div className="space-y-6">
+                                <h3 className="text-3xl font-bold text-gray-900">The Solution</h3>
+                                <p className="text-gray-600 leading-relaxed">
+                                    HearOnly introduces AI-driven selective hearing that enables users to silence 
+                                    unwanted noises while amplifying important sounds in real-time. Using advanced 
+                                    psychoacoustic research and adaptive learning algorithms, we're creating a 
+                                    personalized audio experience.
+                                </p>
+                                <div className="stat-card p-6 rounded-lg">
+                                    <div className="text-4xl font-bold text-purple-600 mb-2">±5%</div>
+                                    <div className="text-gray-700">Target accuracy for speech/noise differentiation</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {features.map((feature, idx) => (
+                                <div key={idx} className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl hover-scale">
+                                    <div className="text-5xl mb-4">{feature.icon}</div>
+                                    <h4 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h4>
+                                    <p className="text-gray-600">{feature.description}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white">
+                            <h3 className="text-3xl font-bold mb-6">Project Scope & Positioning</h3>
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-lg mb-3">Industry</h4>
+                                    <p className="text-white text-opacity-90">Consumer Electronics - Headphone & Earphone Market</p>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-lg mb-3">Innovation</h4>
+                                    <p className="text-white text-opacity-90">AI-driven selective hearing with adaptive filtering technology</p>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-lg mb-3">Applications</h4>
+                                    <p className="text-white text-opacity-90">Consumer, Healthcare, Academia, Enterprise Wellness</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Methodology Section
+        const Methodology = () => {
+            const phases = [
+                {
+                    name: 'Initiation & Planning',
+                    duration: 'Months 1-6',
+                    tasks: ['Charter approval', 'Stakeholder alignment', 'Requirements gathering', 'Governance setup']
+                },
+                {
+                    name: 'Design & Development',
+                    duration: 'Months 7-11',
+                    tasks: ['Prototype creation', 'AI algorithm development', 'Hardware design', 'Iterative feedback']
+                },
+                {
+                    name: 'Testing & Validation',
+                    duration: 'Months 12-17',
+                    tasks: ['Quality assurance', 'Compliance verification', 'User acceptance testing', 'System validation']
+                },
+                {
+                    name: 'Deployment & Transition',
+                    duration: 'Months 18-24',
+                    tasks: ['Go-live readiness', 'MVP launch', 'User training', 'Market entry']
+                },
+                {
+                    name: 'Expansion',
+                    duration: 'Years 3-5',
+                    tasks: ['Advanced automation', 'Analytics integration', 'Performance optimization', 'Market scaling']
+                }
+            ];
+
+            return (
+                <section id="methodology" className="section py-20 bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Methodology & Approach</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                A hybrid methodology combining Agile sprints with Stage-Gate governance
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-12 mb-16">
+                            <div className="bg-white p-8 rounded-2xl shadow-lg">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-4">Agile Sprints</h3>
+                                <ul className="space-y-3 text-gray-600">
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>One-month sprint duration</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Iterative development and testing</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Rapid feedback incorporation</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Continuous performance optimization</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-white p-8 rounded-2xl shadow-lg">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-4">Stage-Gate Governance</h3>
+                                <ul className="space-y-3 text-gray-600">
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Formal reviews at critical milestones</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Budget and scope monitoring</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Risk governance mechanism</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-purple-600 mr-3">✓</span>
+                                        <span>Go/No-go decision points</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-8">Project Phases</h3>
+                            <div className="space-y-6">
+                                {phases.map((phase, idx) => (
+                                    <div key={idx} className="relative pl-8 pb-6 border-l-2 border-purple-200 last:border-0 timeline-item">
+                                        <div className="mb-2">
+                                            <span className="inline-block px-4 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+                                                {phase.duration}
+                                            </span>
+                                        </div>
+                                        <h4 className="text-xl font-bold text-gray-900 mb-3">{phase.name}</h4>
+                                        <div className="grid md:grid-cols-2 gap-3">
+                                            {phase.tasks.map((task, taskIdx) => (
+                                                <div key={taskIdx} className="flex items-center text-gray-600">
+                                                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                                                    {task}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {[
+                                { title: 'MVP Delivery', value: '24 Months', description: 'Fully functional prototype' },
+                                { title: 'Budget', value: '$5.5M', description: 'Total project investment' },
+                                { title: 'Team', value: '50+ Experts', description: 'Cross-functional specialists' }
+                            ].map((stat, idx) => (
+                                <div key={idx} className="stat-card p-6 rounded-xl">
+                                    <div className="text-3xl font-bold text-purple-600 mb-2">{stat.value}</div>
+                                    <div className="text-lg font-semibold text-gray-900 mb-1">{stat.title}</div>
+                                    <div className="text-gray-600 text-sm">{stat.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Team Section
+        const Team = () => {
+            const teamMembers = [
+                { name: 'Natasha Anderson', id: 'na3107', role: 'Project Lead' },
+                { name: 'Aleks Kjaer', id: 'ak5222', role: 'Technical Lead' },
+                { name: 'Sriya Thotakura', id: 'st3827', role: 'Research Lead' },
+                { name: 'Robert Grinnell', id: 'rg3480', role: 'Strategy Lead' }
+            ];
+
+            const departments = [
+                {
+                    name: 'Executive Leadership',
+                    roles: ['Chief Transformation Officer (CTO)', 'Steering Committee', 'Executive Sponsor']
+                },
+                {
+                    name: 'Product Development',
+                    roles: ['AI/ML Engineers', 'Hardware Engineers', 'Software Developers', 'Acoustic Engineers']
+                },
+                {
+                    name: 'Project Management',
+                    roles: ['Program Manager', 'PMO Team', 'Workstream Leads', 'External Consultants']
+                },
+                {
+                    name: 'Operations',
+                    roles: ['Supply Chain Lead', 'Quality Assurance', 'Manufacturing Team', 'Logistics Coordination']
+                },
+                {
+                    name: 'Marketing & UX',
+                    roles: ['Marketing Lead', 'UX Researchers', 'Customer Experience', 'Training Team']
+                },
+                {
+                    name: 'Compliance & IT',
+                    roles: ['Compliance Manager', 'Data Security', 'IT Infrastructure', 'Regulatory Affairs']
+                }
+            ];
+
+            return (
+                <section id="team" className="section py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Blue Team</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                A multidisciplinary team of 50+ experts driving innovation in audio technology
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                            {teamMembers.map((member, idx) => (
+                                <div key={idx} className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl text-center hover-scale">
+                                    <div className="w-24 h-24 gradient-bg rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span className="text-3xl text-white font-bold">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+                                    <p className="text-purple-600 font-semibold mb-2">{member.role}</p>
+                                    <p className="text-gray-500 text-sm">{member.id}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mb-12">
+                            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Organizational Structure</h3>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {departments.map((dept, idx) => (
+                                    <div key={idx} className="bg-white border-2 border-purple-100 rounded-xl p-6 hover-scale">
+                                        <h4 className="text-lg font-bold text-purple-600 mb-4">{dept.name}</h4>
+                                        <ul className="space-y-2">
+                                            {dept.roles.map((role, roleIdx) => (
+                                                <li key={roleIdx} className="text-gray-600 text-sm flex items-start">
+                                                    <span className="text-purple-400 mr-2">•</span>
+                                                    {role}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white text-center">
+                            <h3 className="text-3xl font-bold mb-4">Collaborative Excellence</h3>
+                            <p className="text-xl text-white text-opacity-90 max-w-3xl mx-auto">
+                                Our success depends on clear communication, structured collaboration, and 
+                                transparent accountability across all functional areas.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Schedule & Budget Section
+        const Schedule = () => {
+            const budgetBreakdown = [
+                { phase: 'Initiation & Planning', percentage: 15, amount: '$750K' },
+                { phase: 'Design & Development', percentage: 50, amount: '$2.5M' },
+                { phase: 'Testing & Validation', percentage: 20, amount: '$1.0M' },
+                { phase: 'Deployment & Transition', percentage: 15, amount: '$750K' }
+            ];
+
+            return (
+                <section id="schedule" className="section py-20 bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Schedule & Budget</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Strategic resource allocation across 24-month MVP development
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-12 mb-12">
+                            <div className="bg-white rounded-2xl shadow-lg p-8">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-6">Total Budget</h3>
+                                <div className="text-center mb-8">
+                                    <div className="text-6xl font-bold text-purple-600 mb-2">$5.5M</div>
+                                    <div className="text-gray-600">Including 10% contingency reserve</div>
+                                </div>
+                                <div className="space-y-4">
+                                    {budgetBreakdown.map((item, idx) => (
+                                        <div key={idx}>
+                                            <div className="flex justify-between mb-2">
+                                                <span className="text-gray-700 font-medium">{item.phase}</span>
+                                                <span className="text-purple-600 font-bold">{item.amount}</span>
+                                            </div>
+                                            <div className="w-full bg-gray-200 rounded-full h-3">
+                                                <div 
+                                                    className="gradient-bg h-3 rounded-full transition-all duration-1000"
+                                                    style={{width: `${item.percentage}%`}}
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-2xl shadow-lg p-8">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Milestones</h3>
+                                <div className="space-y-6">
+                                    {[
+                                        { milestone: 'Project Charter Sign-Off', month: 'Month 1', gate: 'Gate 01' },
+                                        { milestone: 'Design Approval', month: 'Month 7', gate: 'Gate 02' },
+                                        { milestone: 'Testing Validation', month: 'Month 12', gate: 'Gate 03' },
+                                        { milestone: 'Prototype Release', month: 'Month 17', gate: 'Gate 04' },
+                                        { milestone: 'Market Go-Live', month: 'Month 24', gate: 'Gate 05' }
+                                    ].map((item, idx) => (
+                                        <div key={idx} className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                                            <div>
+                                                <div className="font-bold text-gray-900">{item.milestone}</div>
+                                                <div className="text-sm text-gray-600">{item.month}</div>
+                                            </div>
+                                            <div className="px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold">
+                                                {item.gate}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-lg p-8">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6">Resource Allocation</h3>
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-lg text-gray-900 mb-4">Personnel Costs</h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">R&D Team</span>
+                                            <span className="font-bold text-purple-600">$1.5M</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Engineering</span>
+                                            <span className="font-bold text-purple-600">$1.0M</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">PMO & Management</span>
+                                            <span className="font-bold text-purple-600">$500K</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Consultants</span>
+                                            <span className="font-bold text-purple-600">$400K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-lg text-gray-900 mb-4">Non-Personnel Costs</h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Hardware & Components</span>
+                                            <span className="font-bold text-purple-600">$800K</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Software Licenses</span>
+                                            <span className="font-bold text-purple-600">$300K</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Testing & QA</span>
+                                            <span className="font-bold text-purple-600">$500K</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-600">Marketing & Launch</span>
+                                            <span className="font-bold text-purple-600">$500K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Marketing Section
+        const Marketing = () => {
+            const targetSegments = [
+                {
+                    name: 'Individual Consumers',
+                    icon: '👤',
+                    description: 'Urban professionals, commuters, and remote workers in high-noise environments',
+                    focus: 'Lifestyle & Productivity'
+                },
+                {
+                    name: 'Healthcare & Wellness',
+                    icon: '🏥',
+                    description: 'Providers supporting patients with sensory processing challenges',
+                    focus: 'Accessibility & Wellbeing'
+                },
+                {
+                    name: 'Enterprise & Institutions',
+                    icon: '🏢',
+                    description: 'Corporations and organizations prioritizing employee wellness',
+                    focus: 'Productivity & Inclusion'
+                }
+            ];
+
+            return (
+                <section id="marketing" className="section py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Marketing Strategy</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Positioning HearOnly at the intersection of lifestyle, wellness, and technology
+                            </p>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white text-center mb-16">
+                            <h3 className="text-3xl font-bold mb-4">Core Brand Message</h3>
+                            <p className="text-2xl font-light">
+                                Audio personalization and accessibility meet advanced AI-driven sound recognition 
+                                for an enhanced audio experience
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8 mb-16">
+                            {targetSegments.map((segment, idx) => (
+                                <div key={idx} className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl hover-scale">
+                                    <div className="text-6xl mb-4">{segment.icon}</div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{segment.name}</h3>
+                                    <p className="text-gray-600 mb-4">{segment.description}</p>
+                                    <div className="inline-block px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+                                        {segment.focus}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-12 mb-12">
+                            <div className="bg-white border-2 border-purple-100 rounded-xl p-8">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-6">Market Positioning</h3>
+                                <ul className="space-y-4">
+                                    {[
+                                        'Premium product with accessibility focus',
+                                        'Sustainable materials & eco-friendly design',
+                                        'Active noise cancellation with AI control',
+                                        'Cognitive wellness & focus enhancement',
+                                        'Sleek lifestyle tech for urban professionals'
+                                    ].map((item, idx) => (
+                                        <li key={idx} className="flex items-start">
+                                            <span className="text-purple-600 mr-3 text-xl">✓</span>
+                                            <span className="text-gray-600">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <div className="bg-white border-2 border-purple-100 rounded-xl p-8">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-6">Distribution Channels</h3>
+                                <div className="space-y-4">
+                                    <div className="p-4 bg-purple-50 rounded-lg">
+                                        <h4 className="font-bold text-gray-900 mb-2">Direct-to-Consumer</h4>
+                                        <p className="text-gray-600 text-sm">HearOnly website & major e-commerce platforms</p>
+                                    </div>
+                                    <div className="p-4 bg-purple-50 rounded-lg">
+                                        <h4 className="font-bold text-gray-900 mb-2">Retail Partnerships</h4>
+                                        <p className="text-gray-600 text-sm">Tech retailers, lifestyle outlets, transportation hubs</p>
+                                    </div>
+                                    <div className="p-4 bg-purple-50 rounded-lg">
+                                        <h4 className="font-bold text-gray-900 mb-2">B2B Strategic</h4>
+                                        <p className="text-gray-600 text-sm">Educational institutions, healthcare providers, corporations</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-lg p-8">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6">Competitive Advantage</h3>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {[
+                                    { label: 'Traditional Headphones', feature: 'Binary noise control' },
+                                    { label: 'Hearing Aids', feature: 'Medical focus only' },
+                                    { label: 'AI Audio (Sony/Bose)', feature: 'Limited personalization' },
+                                    { label: 'HearOnly', feature: 'Full selective control' }
+                                ].map((item, idx) => (
+                                    <div key={idx} className={`p-6 rounded-xl text-center ${idx === 3 ? 'gradient-bg text-white' : 'bg-gray-100'}`}>
+                                        <div className="font-bold mb-2">{item.label}</div>
+                                        <div className={`text-sm ${idx === 3 ? 'text-white' : 'text-gray-600'}`}>{item.feature}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Risk Management Section
+        const Risk = () => {
+            const riskCategories = [
+                {
+                    category: 'Technical Risk',
+                    level: 'Extreme Impact / Low Probability',
+                    threats: ['Real-time filtering limits', 'Synchronization failures', 'Miss ±5% accuracy target'],
+                    mitigation: 'Two-phase development, redundant sync testing, contingency budget for refinement'
+                },
+                {
+                    category: 'Supply Chain',
+                    level: 'High Impact / Medium Probability',
+                    threats: ['Sensor delays', 'SoC manufacturing bottlenecks', 'Component shortages'],
+                    mitigation: 'Specialist hardware partners, fixed-price contracts, multiple suppliers'
+                },
+                {
+                    category: 'Market Risk',
+                    level: 'Medium Impact / Medium Probability',
+                    threats: ['Ethics concerns', 'Low trust in AI control', 'User adoption challenges'],
+                    mitigation: 'Standalone noise-control option, transparent AI behavior, user education'
+                },
+                {
+                    category: 'Resource Risk',
+                    level: 'Medium Impact / Low Probability',
+                    threats: ['Few adaptive-acoustics experts', 'High dependency', 'Knowledge gaps'],
+                    mitigation: 'Budget/time buffers, cost-reimbursable R&D contracts, external consultants'
+                }
+            ];
+
+            return (
+                <section id="risk" className="section py-20 bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold text-gray-900 mb-4">Risk Management</h2>
+                            <div className="section-divider w-24 mx-auto mb-6"></div>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Proactive, iterative risk management embedded within hybrid governance
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8 mb-12">
+                            {riskCategories.map((risk, idx) => (
+                                <div key={idx} className="bg-white rounded-xl shadow-lg p-8 border-l-4 border-purple-600">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <h3 className="text-xl font-bold text-gray-900">{risk.category}</h3>
+                                        <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                                            {risk.level}
+                                        </span>
+                                    </div>
+                                    <div className="mb-4">
+                                        <h4 className="font-semibold text-gray-700 mb-2">Key Threats:</h4>
+                                        <ul className="space-y-2">
+                                            {risk.threats.map((threat, tIdx) => (
+                                                <li key={tIdx} className="text-gray-600 text-sm flex items-start">
+                                                    <span className="text-red-400 mr-2">⚠</span>
+                                                    {threat}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="pt-4 border-t">
+                                        <h4 className="font-semibold text-gray-700 mb-2">Mitigation Strategy:</h4>
+                                        <p className="text-gray-600 text-sm">{risk.mitigation}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6">Risk Management Process</h3>
+                            <div className="grid md:grid-cols-5 gap-4">
+                                {[
+                                    { step: '1', name: 'Identification', desc: 'Cross-functional workshops' },
+                                    { step: '2', name: 'Assessment', desc: 'Probability & impact analysis' },
+                                    { step: '3', name: 'Prioritization', desc: 'Risk matrix visualization' },
+                                    { step: '4', name: 'Response Planning', desc: 'Mitigation strategies' },
+                                    { step: '5', name: 'Monitoring', desc: 'Continuous control' }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="text-center">
+                                        <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
+                                            {item.step}
+                                        </div>
+                                        <h4 className="font-bold text-gray-900 mb-2">{item.name}</h4>
+                                        <p className="text-gray-600 text-sm">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {[
+                                { title: 'Reserve Budget', value: '10%', description: 'Contingency for known-unknowns' },
+                                { title: 'Review Cadence', value: 'Monthly', description: 'Steering committee oversight' },
+                                { title: 'Risk Owners', value: 'RACI Matrix', description: 'Clear accountability structure' }
+                            ].map((stat, idx) => (
+                                <div key={idx} className="stat-card p-6 rounded-xl">
+                                    <div className="text-3xl font-bold text-purple-600 mb-2">{stat.value}</div>
+                                    <div className="text-lg font-semibold text-gray-900 mb-1">{stat.title}</div>
+                                    <div className="text-gray-600 text-sm">{stat.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-900 text-white py-12">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid md:grid-cols-4 gap-8 mb-8">
+                            <div>
+                                <h3 className="text-xl font-bold mb-4">HearOnly</h3>
+                                <p className="text-gray-400 text-sm">
+                                    The future of selective hearing through AI-powered audio personalization.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold mb-4">Project</h4>
+                                <ul className="space-y-2 text-gray-400 text-sm">
+                                    <li><a href="#overview" className="hover:text-purple-400">Overview</a></li>
+                                    <li><a href="#methodology" className="hover:text-purple-400">Methodology</a></li>
+                                    <li><a href="#schedule" className="hover:text-purple-400">Schedule</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold mb-4">Team</h4>
+                                <ul className="space-y-2 text-gray-400 text-sm">
+                                    <li><a href="#team" className="hover:text-purple-400">Blue Team</a></li>
+                                    <li><a href="#team" className="hover:text-purple-400">Organization</a></li>
+                                    <li><a href="#team" className="hover:text-purple-400">Roles</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold mb-4">Institution</h4>
+                                <p className="text-gray-400 text-sm">
+                                    Columbia University<br />
+                                    School of Professional Studies<br />
+                                    Fall 2025
+                                </p>
+                            </div>
+                        </div>
+                        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                            <p>© 2025 HearOnly Project - Blue Team. All rights reserved.</p>
+                            <p className="mt-2">Natasha Anderson • Aleks Kjaer • Sriya Thotakura • Robert Grinnell</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return (
+                <div className="min-h-screen">
+                    <Navigation />
+                    <Hero />
+                    <Overview />
+                    <Methodology />
+                    <Team />
+                    <Schedule />
+                    <Marketing />
+                    <Risk />
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
