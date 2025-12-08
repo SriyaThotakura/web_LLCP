@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart E: Financial Exposure and Risk Attribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 32px;
+            margin-top: 0;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #financialChart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .insights-box {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4A90E2;
+        }
+
+        .insights-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .insights-box ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #555;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .insights-box li {
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Financial Exposure and Risk Attribution</h1>
+        <h2>Predicted Cost Drawdown vs Actual (with Risk Overrun Attributions)</h2>
+        
+        <div class="chart-container">
+            <canvas id="financialChart"></canvas>
+        </div>
+
+        <div class="insights-box">
+            <h3>Key Insights</h3>
+            <ul>
+                <li>Actual costs exceed planned costs throughout the project lifecycle</li>
+                <li>Cost overruns are primarily attributed to schedule risks (40%), followed by technical risks (35%) and scope risks (25%)</li>
+                <li>Project is trending toward the total budget threshold including contimake it biggerngency reserves</li>
+                <li>Early identification of risk patterns enables proactive mitigation strategies</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js not loaded');
+                return;
+            }
+        // Generate data points
+        function generateData() {
+            const data = [];
+            for (let i = 0; i <= 25; i++) {
+                const week = i;
+                
+                // Planned Cost (PV) - S-curve pattern
+                const pvBase = 1030000;
+                const pvProgress = Math.min(week / 25, 1);
+                const pv = 100000 + (pvBase - 100000) * (1 - Math.pow(1 - pvProgress, 1.8));
+                
+                // Actual Cost (AC) - slightly higher with increasing divergence
+                let ac;
+                if (week <= 8) {
+                    ac = pv + (week * 2000);
+                } else {
+                    const overrun = (week - 8) * 5000;
+                    ac = pv + 16000 + overrun;
+                }
+                
+                // Risk attributions (only when AC > PV)
+                const totalOverrun = Math.max(0, ac - pv);
+                const technicalRisk = totalOverrun * 0.35;
+                const scheduleRisk = totalOverrun * 0.40;
+                const scopeRisk = totalOverrun * 0.25;
+                
+                data.push({
+                    week: week,
+                    pv: Math.round(pv),
+                    ac: Math.round(ac),
+                    technicalRisk: Math.round(pv + technicalRisk),
+                    scheduleRisk: Math.round(pv + technicalRisk + scheduleRisk),
+                    scopeRisk: Math.round(pv + technicalRisk + scheduleRisk + scopeRisk)
+                });
+            }
+            return data;
+        }
+
+        const chartData = generateData();
+
+        // Format currency
+        function formatCurrency(value) {
+            return '$' + (value / 1000000).toFixed(1) + 'M';
+        }
+
+        // Create chart
+        const ctx = document.getElementById('financialChart');
+        if (!ctx) {
+            console.error('Could not find chart canvas');
+            return;
+        }
+        
+        const chart = new Chart(ctx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: chartData.map(d => d.week),
+                datasets: [
+                    // Scope Risk Area (top layer)
+                    {
+                        label: 'Scope Risk Overruns',
+                        data: chartData.map(d => d.scopeRisk),
+                        backgroundColor: 'rgba(244, 143, 177, 0.4)',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        fill: '+1',
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        order: 5
+                    },
+                    // Schedule Risk Area (middle layer)
+                    {
+                        label: 'Schedule Risk Overruns',
+                        data: chartData.map(d => d.scheduleRisk),
+                        backgroundColor: 'rgba(179, 157, 219, 0.5)',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        fill: '+1',
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        order: 4
+                    },
+                    // Technical Risk Area (bottom layer)
+                    {
+                        label: 'Technical Risk Overruns',
+                        data: chartData.map(d => d.technicalRisk),
+                        backgroundColor: 'rgba(255, 179, 102, 0.5)',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        fill: '+1',
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        order: 3
+                    },
+                    // Planned Cost (PV) - Dashed line
+                    {
+                        label: 'Planned Cost Drawdown (PV)',
+                        data: chartData.map(d => d.pv),
+                        borderColor: '#4A90E2',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        borderDash: [8, 4],
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#4A90E2',
+                        fill: false,
+                        order: 2,
+                        tension: 0.4
+                    },
+                    // Actual Cost (AC) - Solid line
+                    {
+                        label: 'Actual Cost Drawdown (AC)',
+                        data: chartData.map(d => d.ac),
+                        borderColor: '#1a1a1a',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: '#1a1a1a',
+                        fill: false,
+                        order: 1,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'start',
+                        labels: {
+                            font: {
+                                size: 13
+                            },
+                            padding: 15,
+                            usePointStyle: true,
+                            boxWidth: 40,
+                            boxHeight: 8,
+                            generateLabels: function(chart) {
+                                const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                // Reverse order to show lines first, then areas
+                                return labels.reverse();
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'white',
+                        titleColor: '#1a1a1a',
+                        bodyColor: '#1a1a1a',
+                        borderColor: '#ccc',
+                        borderWidth: 1,
+                        padding: 12,
+                        boxPadding: 6,
+                        usePointStyle: false,
+                        displayColors: true,
+                        callbacks: {
+                            title: function(context) {
+                                return 'Week ' + context[0].label;
+                            },
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                const value = formatCurrency(context.parsed.y);
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Project Week',
+                            font: {
+                                size: 14,
+                                weight: '500'
+                            },
+                            color: '#666'
+                        },
+                        ticks: {
+                            color: '#666',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            color: '#666'
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 1200000,
+                        title: {
+                            display: true,
+                            text: 'Cumulative Cost ($)',
+                            font: {
+                                size: 14,
+                                weight: '500'
+                            },
+                            color: '#666'
+                        },
+                        ticks: {
+                            color: '#666',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return formatCurrency(value);
+                            }
+                        },
+                        grid: {
+                            color: '#e0e0e0',
+                            drawBorder: false
+                        },
+                        border: {
+                            color: '#666',
+                            dash: [3, 3]
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'budgetLines',
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const yAxis = chart.scales.y;
+                    const xAxis = chart.scales.x;
+                    
+                    // Base Budget line at 1,030,000
+                    const baseBudgetY = yAxis.getPixelForValue(1030000);
+                    ctx.save();
+                    ctx.setLineDash([3, 3]);
+                    ctx.strokeStyle = '#666';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(xAxis.left, baseBudgetY);
+                    ctx.lineTo(xAxis.right, baseBudgetY);
+                    ctx.stroke();
+                    
+                    ctx.font = '500 12px Inter';
+                    ctx.fillStyle = '#666';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('Base Budget at Completion', xAxis.right - 10, baseBudgetY - 8);
+                    
+                    // Total Budget line at 1,180,000
+                    const totalBudgetY = yAxis.getPixelForValue(1180000);
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = '#999';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(xAxis.left, totalBudgetY);
+                    ctx.lineTo(xAxis.right, totalBudgetY);
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#999';
+                    ctx.fillText('Total Budget (Base + Contingency)', xAxis.right - 10, totalBudgetY - 8);
+                    
+                    ctx.restore();
+                }
+            }]
+        });
+        });
+    </script>
+</body>
+</body>
+</html>

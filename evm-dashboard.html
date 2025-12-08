@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVM Dashboard - Performance Metrics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .metrics-panel {
+            background-color: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 2px solid #cbd5e0;
+        }
+
+        .metrics-panel h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 12px;
+        }
+
+        .bac-section {
+            margin-bottom: 28px;
+        }
+
+        .bac-label {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .bac-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2b6cb0;
+            margin-left: 8px;
+        }
+
+        .indices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding: 16px;
+            background-color: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .index-box {
+            text-align: left;
+        }
+
+        .index-label {
+            font-size: 13px;
+            color: #718096;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .index-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .cpi-value {
+            color: #e53e3e;
+        }
+
+        .spi-value {
+            color: #dd6b20;
+        }
+
+        .index-subtitle {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 2px;
+        }
+
+        .estimate-box {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border-left: 4px solid;
+        }
+
+        .eac-box {
+            background-color: #fff5f5;
+            border-left-color: #fc8181;
+        }
+
+        .etc-box {
+            background-color: #fffaf0;
+            border-left-color: #f6ad55;
+            margin-bottom: 24px;
+        }
+
+        .estimate-label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .eac-box .estimate-label {
+            color: #742a2a;
+        }
+
+        .etc-box .estimate-label {
+            color: #7c2d12;
+        }
+
+        .estimate-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .eac-box .estimate-value {
+            color: #c53030;
+        }
+
+        .etc-box .estimate-value {
+            color: #c05621;
+        }
+
+        .estimate-description {
+            font-size: 12px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .eac-box .estimate-description {
+            color: #742a2a;
+        }
+
+        .etc-box .estimate-description {
+            color: #7c2d12;
+        }
+
+        .conclusion-box {
+            background-color: #edf2f7;
+            padding: 18px;
+            border-radius: 8px;
+            border: 2px solid #4299e1;
+        }
+
+        .conclusion-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 8px;
+        }
+
+        .conclusion-text {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .conclusion-text strong.overrun {
+            color: #c53030;
+        }
+
+        .conclusion-text strong.behind {
+            color: #dd6b20;
+        }
+
+        .chart-panel {
+            background-color: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .chart-panel h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 420px;
+            margin-bottom: 24px;
+        }
+
+        .insights-box {
+            padding: 16px;
+            background-color: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .insights-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .insights-box ul {
+            padding-left: 20px;
+            color: #4a5568;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel - EVM Metrics -->
+        <div class="metrics-panel">
+            <h2>EVM Forecasting Metrics (at Week 25):</h2>
+
+            <div class="bac-section">
+                <div class="bac-label">**Budget at Completion (BAC):**</div>
+                <div class="bac-value">$1,000,000</div>
+            </div>
+
+            <div class="indices-grid">
+                <div class="index-box">
+                    <div class="index-label">**Current CPI:**</div>
+                    <div class="index-value cpi-value">0.657</div>
+                    <div class="index-subtitle">(Cost Efficiency)</div>
+                </div>
+                <div class="index-box">
+                    <div class="index-label">**Current SPI:**</div>
+                    <div class="index-value spi-value">0.706</div>
+                    <div class="index-subtitle">(Schedule Efficiency)</div>
+                </div>
+            </div>
+
+            <div class="estimate-box eac-box">
+                <div class="estimate-label">**Estimate At Completion (EAC):**</div>
+                <div class="estimate-value">$1,598,819,808,899</div>
+                <div class="estimate-description">(Projected Final Cost based on current CPI)</div>
+            </div>
+
+            <div class="estimate-box etc-box">
+                <div class="estimate-label">**Estimate To Complete (ETC):**</div>
+                <div class="estimate-value">$1,598,818,758,912</div>
+                <div class="estimate-description">(Remaining funds needed to complete the project)</div>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="conclusion-title">Conclusion:</div>
+                <div class="conclusion-text">
+                    The project is currently projected to <strong class="overrun">overrun the budget</strong> (EAC &gt; BAC) 
+                    and is <strong class="behind">slightly behind schedule</strong> (SPI &lt; 1.0) with an efficiency of 0.706.
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Performance Chart -->
+        <div class="chart-panel">
+            <h2>Performance Indices Over Time (CPI & SPI)</h2>
+            
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+            <div class="insights-box">
+                <div class="insights-title">Key Performance Observations</div>
+                <ul>
+                    <li>Both indices peaked around weeks 6-9, indicating optimal performance mid-project</li>
+                    <li>Significant decline after week 10, with both metrics falling below target</li>
+                    <li>CPI declined more severely than SPI, indicating cost overruns are the primary concern</li>
+                    <li>Current trajectory suggests continued degradation without corrective action</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Performance data
+        const performanceData = [
+            { week: 0, spi: 0.88, cpi: 0.82 },
+            { week: 1, spi: 0.88, cpi: 0.83 },
+            { week: 2, spi: 0.90, cpi: 0.87 },
+            { week: 3, spi: 0.93, cpi: 0.88 },
+            { week: 4, spi: 0.96, cpi: 0.90 },
+            { week: 5, spi: 0.99, cpi: 0.90 },
+            { week: 6, spi: 1.00, cpi: 0.91 },
+            { week: 7, spi: 1.00, cpi: 0.92 },
+            { week: 8, spi: 1.00, cpi: 0.95 },
+            { week: 9, spi: 0.98, cpi: 0.95 },
+            { week: 10, spi: 0.96, cpi: 0.91 },
+            { week: 11, spi: 0.94, cpi: 0.91 },
+            { week: 12, spi: 0.91, cpi: 0.90 },
+            { week: 13, spi: 0.89, cpi: 0.87 },
+            { week: 14, spi: 0.87, cpi: 0.86 },
+            { week: 15, spi: 0.86, cpi: 0.85 },
+            { week: 16, spi: 0.85, cpi: 0.83 },
+            { week: 17, spi: 0.84, cpi: 0.81 },
+            { week: 25, spi: 0.706, cpi: 0.657 }
+        ];
+
+        // Create chart
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: performanceData.map(d => d.week),
+                datasets: [
+                    {
+                        label: 'Schedule Performance Index (SPI)',
+                        data: performanceData.map(d => d.spi),
+                        borderColor: '#f6ad55',
+                        backgroundColor: 'rgba(246, 173, 85, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#f6ad55',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 6,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Cost Performance Index (CPI)',
+                        data: performanceData.map(d => d.cpi),
+                        borderColor: '#9f7aea',
+                        backgroundColor: 'rgba(159, 122, 234, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#9f7aea',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 6,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            },
+                            padding: 15,
+                            usePointStyle: true,
+                            pointStyle: 'line'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'white',
+                        titleColor: '#2c3e50',
+                        bodyColor: '#2c3e50',
+                        borderColor: '#ddd',
+                        borderWidth: 1,
+                        padding: 12,
+                        boxPadding: 6,
+                        usePointStyle: true,
+                        callbacks: {
+                            title: function(context) {
+                                return 'Week ' + context[0].label;
+                            },
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(3);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Project Week',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            },
+                            color: '#4a5568'
+                        },
+                        ticks: {
+                            color: '#718096',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            color: '#cbd5e0'
+                        }
+                    },
+                    y: {
+                        min: 0.80,
+                        max: 1.20,
+                        ticks: {
+                            stepSize: 0.05,
+                            color: '#718096',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return value.toFixed(2);
+                            }
+                        },
+                        grid: {
+                            color: '#e2e8f0',
+                            drawBorder: false
+                        },
+                        border: {
+                            color: '#cbd5e0',
+                            dash: [3, 3]
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'targetLine',
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const yAxis = chart.scales.y;
+                    const xAxis = chart.scales.x;
+                    const targetY = yAxis.getPixelForValue(1.0);
+
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = '#a0aec0';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(xAxis.left, targetY);
+                    ctx.lineTo(xAxis.right, targetY);
+                    ctx.stroke();
+
+                    ctx.font = '600 13px "Segoe UI"';
+                    ctx.fillStyle = '#718096';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('Target (1.0)', xAxis.right - 10, targetY - 8);
+                    ctx.restore();
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

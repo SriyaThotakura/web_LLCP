@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Category Table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #2c2c2c;
+            color: white;
+        }
+        
+        th {
+            padding: 20px;
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        td {
+            padding: 25px 20px;
+            font-size: 20px;
+        }
+        
+        .risk-name {
+            font-weight: bold;
+            background: white;
+        }
+        
+        .impact-cell {
+            background: #ffb3b3;
+            font-weight: bold;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        .likelihood-cell {
+            background: #ffcccc;
+            font-weight: bold;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        .score-cell {
+            background: #90ee90;
+            font-weight: bold;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        /* Gradient backgrounds for impact */
+        tr:nth-child(1) .impact-cell {
+            background: linear-gradient(to right, #ff6666 45%, transparent 45%);
+        }
+        
+        tr:nth-child(2) .impact-cell {
+            background: linear-gradient(to right, #ff9999 20%, transparent 20%);
+        }
+        
+        tr:nth-child(3) .impact-cell {
+            background: linear-gradient(to right, #ffb3b3 15%, transparent 15%);
+        }
+        
+        tr:nth-child(4) .impact-cell {
+            background: linear-gradient(to right, #ffcccc 10%, transparent 10%);
+        }
+        
+        tr:nth-child(5) .impact-cell {
+            background: linear-gradient(to right, #ffcccc 10%, transparent 10%);
+        }
+        
+        /* Gradient backgrounds for likelihood */
+        tr:nth-child(1) .likelihood-cell {
+            background: #ffcccc;
+        }
+        
+        tr:nth-child(2) .likelihood-cell {
+            background: linear-gradient(to right, #ffb3b3 30%, transparent 30%);
+        }
+        
+        tr:nth-child(3) .likelihood-cell {
+            background: linear-gradient(to right, #ffc9c9 25%, transparent 25%);
+        }
+        
+        tr:nth-child(4) .likelihood-cell {
+            background: linear-gradient(to right, #ffd9d9 20%, transparent 20%);
+        }
+        
+        tr:nth-child(5) .likelihood-cell {
+            background: linear-gradient(to right, #ffe0e0 15%, transparent 15%);
+        }
+        
+        /* Score intensity */
+        tr:nth-child(1) .score-cell {
+            background: #4da64d;
+        }
+        
+        tr:nth-child(2) .score-cell {
+            background: #70b970;
+        }
+        
+        tr:nth-child(3) .score-cell {
+            background: #90cc90;
+        }
+        
+        tr:nth-child(4) .score-cell {
+            background: #b3d9b3;
+        }
+        
+        tr:nth-child(5) .score-cell {
+            background: #cce6cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Risk Category</th>
+                    <th>Impact (%)</th>
+                    <th>Likelihood (%)</th>
+                    <th>Attribution Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="risk-name">Technical Risk</td>
+                    <td class="impact-cell">45</td>
+                    <td class="likelihood-cell">20</td>
+                    <td class="score-cell">900</td>
+                </tr>
+                <tr>
+                    <td class="risk-name">Schedule Risk</td>
+                    <td class="impact-cell">20</td>
+                    <td class="likelihood-cell">30</td>
+                    <td class="score-cell">600</td>
+                </tr>
+                <tr>
+                    <td class="risk-name">Scope Risk</td>
+                    <td class="impact-cell">15</td>
+                    <td class="likelihood-cell">25</td>
+                    <td class="score-cell">375</td>
+                </tr>
+                <tr>
+                    <td class="risk-name">External/Vendor Risk</td>
+                    <td class="impact-cell">10</td>
+                    <td class="likelihood-cell">20</td>
+                    <td class="score-cell">200</td>
+                </tr>
+                <tr>
+                    <td class="risk-name">Compliance/Regulatory Risk</td>
+                    <td class="impact-cell">10</td>
+                    <td class="likelihood-cell">15</td>
+                    <td class="score-cell">150</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

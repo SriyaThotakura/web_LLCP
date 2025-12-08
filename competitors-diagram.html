@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Market Competitors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&family=Crimson+Pro:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #18181B;
+            --light: #FAFAFA;
+            --accent: #F59E0B;
+            --gray: #71717A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--light);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .competitors-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .competitor-card {
+            background: white;
+            border: 3px solid var(--dark);
+            padding: 22px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .competitor-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0 var(--dark);
+        }
+
+        .competitor-card:nth-child(1) { border-top: 5px solid #0EA5E9; }
+        .competitor-card:nth-child(2) { border-top: 5px solid #8B5CF6; }
+        .competitor-card:nth-child(3) { border-top: 5px solid #EF4444; }
+        .competitor-card:nth-child(4) { border-top: 5px solid #10B981; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F4F4F5;
+            border: 3px solid var(--dark);
+            flex-shrink: 0;
+        }
+
+        .competitor-card:nth-child(1) .icon-container {
+            background: #E0F2FE;
+            border-color: #0EA5E9;
+        }
+
+        .competitor-card:nth-child(2) .icon-container {
+            background: #EDE9FE;
+            border-color: #8B5CF6;
+        }
+
+        .competitor-card:nth-child(3) .icon-container {
+            background: #FEE2E2;
+            border-color: #EF4444;
+        }
+
+        .competitor-card:nth-child(4) .icon-container {
+            background: #D1FAE5;
+            border-color: #10B981;
+        }
+
+        .icon {
+            font-size: 28px;
+        }
+
+        .competitor-name {
+            font-family: 'Crimson Pro', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .competitor-description {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .key-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .feature-tag {
+            background: #F4F4F5;
+            border: 2px solid var(--dark);
+            padding: 4px 8px;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .competitor-card:nth-child(1) .feature-tag {
+            background: #E0F2FE;
+            border-color: #0EA5E9;
+            color: #075985;
+        }
+
+        .competitor-card:nth-child(2) .feature-tag {
+            background: #EDE9FE;
+            border-color: #8B5CF6;
+            color: #5B21B6;
+        }
+
+        .competitor-card:nth-child(3) .feature-tag {
+            background: #FEE2E2;
+            border-color: #EF4444;
+            color: #991B1B;
+        }
+
+        .competitor-card:nth-child(4) .feature-tag {
+            background: #D1FAE5;
+            border-color: #10B981;
+            color: #065F46;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .competitors-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .competitors-row {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .competitor-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="section-badge">Competitive Landscape</div>
+            <h1 class="page-title">Main Market Competitors</h1>
+        </div>
+
+        <div class="competitors-row">
+            <!-- Starkey -->
+            <div class="competitor-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <div class="icon">🎧</div>
+                    </div>
+                    <h2 class="competitor-name">Starkey</h2>
+                </div>
+                <p class="competitor-description">
+                    AI-enhanced, clinically backed hearing aids for speech optimization and noise filtering.
+                </p>
+                <div class="key-features">
+                    <span class="feature-tag">AI-Enhanced</span>
+                    <span class="feature-tag">Clinical</span>
+                    <span class="feature-tag">Medical</span>
+                </div>
+            </div>
+
+            <!-- ClearBuds -->
+            <div class="competitor-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <div class="icon">🎵</div>
+                    </div>
+                    <h2 class="competitor-name">ClearBuds</h2>
+                </div>
+                <p class="competitor-description">
+                    Dual-earbud neural processor for real-time voice separation.
+                </p>
+                <div class="key-features">
+                    <span class="feature-tag">Neural Proc.</span>
+                    <span class="feature-tag">Voice Sep.</span>
+                    <span class="feature-tag">Real-Time</span>
+                </div>
+            </div>
+
+            <!-- Sony -->
+            <div class="competitor-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <div class="icon">🔊</div>
+                    </div>
+                    <h2 class="competitor-name">Sony</h2>
+                </div>
+                <p class="competitor-description">
+                    Consumer audio leader with premium headphones and active noise cancellation.
+                </p>
+                <div class="key-features">
+                    <span class="feature-tag">Premium</span>
+                    <span class="feature-tag">ANC Tech</span>
+                    <span class="feature-tag">Leader</span>
+                </div>
+            </div>
+
+            <!-- Bose -->
+            <div class="competitor-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <div class="icon">🎼</div>
+                    </div>
+                    <h2 class="competitor-name">Bose</h2>
+                </div>
+                <p class="competitor-description">
+                    Pioneer in noise-cancelling headphones and audio innovation.
+                </p>
+                <div class="key-features">
+                    <span class="feature-tag">ANC Pioneer</span>
+                    <span class="feature-tag">Innovation</span>
+                    <span class="feature-tag">Premium</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
