@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner vs. In-House Development & Legal Considerations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #667eea;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Strategy Overview */
+        .strategy-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e7ff;
+        }
+
+        .strategy-header h2 {
+            font-size: 1.8rem;
+            color: #1f2933;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-subtitle {
+            font-size: 1rem;
+            color: #546e7a;
+        }
+
+        /* Main Grid Layout */
+        .development-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #667eea;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .section-card.expanded {
+            border-color: #667eea;
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.25);
+        }
+
+        .section-card.expanded::before {
+            transform: scaleX(1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .section-card.external .section-icon {
+            background: #764ba2;
+        }
+
+        .section-title {
+            flex: 1;
+        }
+
+        .section-title h3 {
+            font-size: 1.4rem;
+            color: #1f2933;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title .subtitle {
+            font-size: 0.85rem;
+            color: #78909c;
+            font-weight: 500;
+        }
+
+        .expand-icon {
+            font-size: 1.2rem;
+            color: #90a4ae;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Section Content */
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .section-card.expanded .section-content {
+            max-height: 800px;
+        }
+
+        .content-block {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .section-card.expanded .content-block {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-card.expanded .content-block:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .section-card.expanded .content-block:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .section-card.expanded .content-block:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .content-block h4 {
+            font-size: 1.05rem;
+            color: #455a64;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-block h4 .emoji {
+            font-size: 1.1rem;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-list li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #546e7a;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .content-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 1.1rem;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .section-card.external .content-list li::before {
+            background: #764ba2;
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 3px solid #667eea;
+        }
+
+        .section-card.external .content-box {
+            border-left-color: #764ba2;
+        }
+
+        /* Legal Section */
+        .legal-section {
+            background: #fef3c7;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid #fbbf24;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-section::before {
+            content: "⚖️";
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 80px;
+            opacity: 0.1;
+        }
+
+        .legal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .legal-icon {
+            width: 50px;
+            height: 50px;
+            background: #f59e0b;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .legal-title h3 {
+            font-size: 1.4rem;
+            color: #78350f;
+            margin-bottom: 0.25rem;
+        }
+
+        .legal-title .subtitle {
+            font-size: 0.85rem;
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        .legal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .legal-section.expanded .legal-content {
+            max-height: 1000px;
+        }
+
+        .quote-box {
+            background: white;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+        }
+
+        .legal-section.expanded .quote-box {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.1s;
+        }
+
+        .quote-box .source {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-box .text {
+            color: #78350f;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .legal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .legal-box {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            border: 1px solid #fbbf24;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .legal-section.expanded .legal-box {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .legal-section.expanded .legal-box:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+
+        .legal-section.expanded .legal-box:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .legal-box h4 {
+            color: #78350f;
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legal-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .legal-box li {
+            padding: 0.4rem 0;
+            padding-left: 1.3rem;
+            position: relative;
+            color: #92400e;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .legal-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: 700;
+        }
+
+        /* Toggle All Button */
+        .toggle-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #e0e7ff;
+            color: #546e7a;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .development-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .legal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .main-card {
+                padding: 1.5rem;
+            }
+
+            .section-card,
+            .legal-section {
+                padding: 1.5rem;
+            }
+
+            .section-title h3,
+            .legal-title h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Partner vs. In-House Development & Legal Considerations</h1>
+        
+        <div class="main-card">
+            <div class="strategy-header">
+                <h2>Development Strategy Framework</h2>
+                <p class="strategy-subtitle">Mixed sourcing strategy supporting flexibility, efficiency, risk reduction, and alignment with stage-gate governance</p>
+            </div>
+
+            <div class="toggle-controls">
+                <button class="toggle-btn" onclick="expandAll()">📂 Expand All Sections</button>
+                <button class="toggle-btn" onclick="collapseAll()">📁 Collapse All Sections</button>
+            </div>
+
+            <div class="development-grid">
+                <!-- In-House Development -->
+                <div class="section-card" id="inhouse" onclick="toggleSection('inhouse')">
+                    <div class="section-header">
+                        <div class="section-icon">🏢</div>
+                        <div class="section-title">
+                            <h3>In-House Development</h3>
+                            <span class="subtitle">Core Innovation & Internal Control</span>
+                        </div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h4><span class="emoji">💡</span> Core Innovation (Internal)</h4>
+                            <div class="content-box">
+                                <ul class="content-list">
+                                    <li>AI-driven selective hearing engine</li>
+                                    <li>Adaptive filtering algorithms</li>
+                                    <li>UX design</li>
+                                    <li>Data governance</li>
+                                    <li>Software integration</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h4><span class="emoji">🎯</span> Strategic Benefits</h4>
+                            <ul class="content-list">
+                                <li>Maintains control of intellectual property</li>
+                                <li>Protects user trust and privacy</li>
+                                <li>Enables continuous improvement through internal testing</li>
+                                <li>Leverages stakeholder feedback directly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Partnerships -->
+                <div class="section-card external" id="external" onclick="toggleSection('external')">
+                    <div class="section-header">
+                        <div class="section-icon">🤝</div>
+                        <div class="section-title">
+                            <h3>External Partnerships</h3>
+                            <span class="subtitle">Outsourced & Consultant Services</span>
+                        </div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h4><span class="emoji">🏭</span> Outsourced Services</h4>
+                            <div class="content-box">
+                                <ul class="content-list">
+                                    <li>Hardware manufacturing</li>
+                                    <li>Acoustic component sourcing</li>
+                                    <li>Global distribution</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h4><span class="emoji">👥</span> External Consultants</h4>
+                            <div class="content-box">
+                                <ul class="content-list">
+                                    <li>Acoustic compliance testing</li>
+                                    <li>Performance calibration</li>
+                                    <li>Regulatory certification</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h4><span class="emoji">✨</span> Partnership Advantages</h4>
+                            <ul class="content-list">
+                                <li>Flexibility in scaling operations</li>
+                                <li>Operational efficiency gains</li>
+                                <li>Risk reduction through specialization</li>
+                                <li>Alignment with stage-gate governance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legal Considerations -->
+            <div class="legal-section" id="legal" onclick="toggleSection('legal')">
+                <div class="legal-header">
+                    <div class="legal-icon">⚖️</div>
+                    <div class="legal-title">
+                        <h3>Legal Considerations</h3>
+                        <span class="subtitle">Compliance, Protection & Risk Management</span>
+                    </div>
+                    <div class="expand-icon">▼</div>
+                </div>
+
+                <div class="legal-content">
+                    <div class="quote-box">
+                        <div class="source">PMI (2021):</div>
+                        <div class="text">"Regulatory agencies or statutes may require specific planning documents before granting permission to proceed or before releasing the project deliverable into the market."</div>
+                    </div>
+
+                    <div class="legal-grid">
+                        <div class="legal-box">
+                            <h4>🔐 Key Priorities</h4>
+                            <ul>
+                                <li>Patent selective-hearing technology</li>
+                                <li>Ensure GDPR-aligned data privacy</li>
+                                <li>Secure consumer-safety compliance</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-box">
+                            <h4>🛡️ Asset Protection</h4>
+                            <ul>
+                                <li>Trademark HearOnly</li>
+                                <li>Copyright firmware</li>
+                                <li>Copyright UI designs</li>
+                                <li>Copyright training data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="content-block" style="margin-top: 1.5rem;">
+                        <div class="content-box" style="border-left-color: #f59e0b;">
+                            <h4 style="color: #78350f; margin-bottom: 0.75rem;">📋 Partner Contract Requirements</h4>
+                            <p style="color: #92400e; line-height: 1.6; margin-bottom: 0.5rem;">
+                                All partner contracts must include the following clauses to safeguard proprietary methods and prevent unauthorized sharing:
+                            </p>
+                            <ul class="content-list" style="margin-top: 0.75rem;">
+                                <li style="color: #92400e;">Non-Disclosure Agreements (NDAs)</li>
+                                <li style="color: #92400e;">Licensing restrictions</li>
+                                <li style="color: #92400e;">Confidentiality clauses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('expanded');
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.section-card, .legal-section').forEach(section => {
+                section.classList.add('expanded');
+            });
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.section-card, .legal-section').forEach(section => {
+                section.classList.remove('expanded');
+            });
+        }
+
+        // Optional: Auto-expand first section on load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('inhouse').classList.add('expanded');
+        });
+    </script>
+</body>
+</html>

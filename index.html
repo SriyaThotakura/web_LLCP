@@ -910,460 +910,10 @@
             </script>
         </section>
 
-        <!-- Conceptual Phase Section -->
-        <section id="conceptual-phase" class="section">
+        <!-- RACI Matrix Section -->
+        <section id="Conceptual Phase" class="section">
             <div class="container">
                 <h2>Conceptual Phase — Designing Selective</h2>
-                <div class="card">
-                    <div class="timeline-container">
-                        <div class="header">
-                            <h3>HearOnly Development Timeline</h3>
-                            <p class="subtitle">5-Year Roadmap to Market Leadership</p>
-                        </div>
-
-                        <div id="timeline"></div>
-
-                        <div class="phase-details">
-                            <div class="phase-card" data-phase="1">
-                                <div class="phase-title">Phase 1: Foundation</div>
-                                <div class="phase-duration">Years 0–2</div>
-                                <div class="phase-description">
-                                    Establish core technology infrastructure and validate market fit through focused development and testing.
-                                </div>
-                                <ul class="phase-milestones">
-                                    <li>AI algorithm development</li>
-                                    <li>Prototype testing & refinement</li>
-                                    <li>Patent filing & IP protection</li>
-                                    <li>Early adopter beta program</li>
-                                    <li>Initial market validation</li>
-                                </ul>
-                            </div>
-
-                            <div class="phase-card" data-phase="2">
-                                <div class="phase-title">Phase 2: Expansion</div>
-                                <div class="phase-duration">Years 2–5</div>
-                                <div class="phase-description">
-                                    Scale operations, expand market reach, and establish HearOnly as the industry standard for selective audio.
-                                </div>
-                                <ul class="phase-milestones">
-                                    <li>Commercial product launch</li>
-                                    <li>Multi-platform integration</li>
-                                    <li>Enterprise partnerships</li>
-                                    <li>Global market expansion</li>
-                                    <li>Advanced AI features rollout</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <style>
-                        .timeline-container {
-                            width: 100%;
-                            padding: 20px;
-                        }
-                        .timeline-container .header {
-                            text-align: center;
-                            margin-bottom: 30px;
-                        }
-                        .timeline-container h3 {
-                            font-size: 1.8rem;
-                            color: #1a202c;
-                            margin-bottom: 8px;
-                        }
-                        .timeline-container .subtitle {
-                            color: #4169E1;
-                            font-size: 0.9rem;
-                            text-transform: uppercase;
-                            letter-spacing: 0.2em;
-                            font-weight: 600;
-                        }
-                        #timeline {
-                            margin: 30px 0;
-                        }
-                        #timeline svg {
-                            width: 100%;
-                            height: auto;
-                            overflow: visible;
-                        }
-                        .axis path,
-                        .axis line {
-                            stroke: #cbd5e0;
-                            stroke-width: 2;
-                        }
-                        .axis text {
-                            fill: #4a5568;
-                            font-size: 13px;
-                            font-weight: 500;
-                        }
-                        .bar {
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        }
-                        .bar:hover {
-                            filter: brightness(1.1);
-                        }
-                        .bar-label {
-                            fill: white;
-                            font-size: 13px;
-                            font-weight: 700;
-                            dominant-baseline: middle;
-                            pointer-events: none;
-                            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-                        }
-                        .phase-details {
-                            margin-top: 40px;
-                            display: grid;
-                            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                            gap: 20px;
-                        }
-                        .phase-card {
-                            background: linear-gradient(135deg, #E8F0FC 0%, #F8FAFF 100%);
-                            border: 2px solid #4169E1;
-                            border-radius: 12px;
-                            padding: 20px;
-                            transition: all 0.3s ease;
-                            cursor: pointer;
-                        }
-                        .phase-card:hover {
-                            transform: translateY(-3px);
-                            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.15);
-                        }
-                        .phase-card.active {
-                            background: linear-gradient(135deg, #4169E1 0%, #6B8FF6 100%);
-                            color: white;
-                            transform: scale(1.02);
-                            box-shadow: 0 10px 30px rgba(65, 105, 225, 0.2);
-                        }
-                        .phase-title {
-                            font-size: 1.2rem;
-                            font-weight: 700;
-                            color: #4169E1;
-                            margin-bottom: 8px;
-                        }
-                        .phase-card.active .phase-title {
-                            color: white;
-                        }
-                        .phase-duration {
-                            font-size: 0.85rem;
-                            color: #6B8FF6;
-                            font-weight: 600;
-                            margin-bottom: 12px;
-                            text-transform: uppercase;
-                            letter-spacing: 0.1em;
-                        }
-                        .phase-card.active .phase-duration {
-                            color: rgba(255, 255, 255, 0.9);
-                        }
-                        .phase-description {
-                            font-size: 0.9rem;
-                            line-height: 1.5;
-                            color: #4a5568;
-                            margin-bottom: 12px;
-                        }
-                        .phase-card.active .phase-description {
-                            color: rgba(255, 255, 255, 0.95);
-                        }
-                        .phase-milestones {
-                            list-style: none;
-                            padding: 0;
-                        }
-                        .phase-milestones li {
-                            padding-left: 20px;
-                            position: relative;
-                            margin-bottom: 6px;
-                            font-size: 0.85rem;
-                            color: #4a5568;
-                        }
-                        .phase-card.active .phase-milestones li {
-                            color: rgba(255, 255, 255, 0.9);
-                        }
-                        .phase-milestones li::before {
-                            content: "✓";
-                            position: absolute;
-                            left: 0;
-                            color: #4169E1;
-                            font-weight: 700;
-                        }
-                        .phase-card.active .phase-milestones li::before {
-                            color: white;
-                        }
-                        .axis-label {
-                            font-size: 12px;
-                            font-weight: 600;
-                            fill: #1a202c;
-                        }
-                        .grid-line {
-                            stroke: #e2e8f0;
-                            stroke-width: 1;
-                            stroke-dasharray: 4;
-                            opacity: 0.5;
-                        }
-                        @media (max-width: 768px) {
-                            .phase-details {
-                                grid-template-columns: 1fr;
-                            }
-                            .timeline-container h3 {
-                                font-size: 1.5rem;
-                            }
-                        }
-                    </style>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // Data
-                            const data = [
-                                { 
-                                    phase: "Phase 1", 
-                                    label: "Foundation",
-                                    start: 0, 
-                                    end: 2,
-                                    color: "#4169E1",
-                                    description: "Core technology & market validation"
-                                },
-                                { 
-                                    phase: "Phase 2", 
-                                    label: "Expansion",
-                                    start: 2, 
-                                    end: 5,
-                                    color: "#6B8FF6",
-                                    description: "Scaling & market leadership"
-                                }
-                            ];
-
-                            const margin = { top: 20, right: 30, bottom: 50, left: 100 };
-                            const container = document.querySelector('#timeline');
-                            const containerWidth = container.offsetWidth;
-                            const height = 200;
-                            const width = containerWidth - margin.left - margin.right;
-
-                            // Create SVG
-                            const svg = d3
-                                .select("#timeline")
-                                .append("svg")
-                                .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-                                .append("g")
-                                .attr("transform", `translate(${margin.left},${margin.top})`);
-
-                            // Add glow filter
-                            const defs = svg.append("defs");
-                            const filter = defs.append("filter")
-                                .attr("id", "glow");
-                            filter.append("feGaussianBlur")
-                                .attr("stdDeviation", "3")
-                                .attr("result", "coloredBlur");
-                            const feMerge = filter.append("feMerge");
-                            feMerge.append("feMergeNode")
-                                .attr("in", "coloredBlur");
-                            feMerge.append("feMergeNode")
-                                .attr("in", "SourceGraphic");
-
-                            // Scales
-                            const x = d3
-                                .scaleLinear()
-                                .domain([0, 5])
-                                .range([0, width]);
-
-                            const y = d3
-                                .scaleBand()
-                                .domain(data.map(d => d.phase))
-                                .range([0, height])
-                                .padding(0.4);
-
-                            // Add grid lines
-                            svg.selectAll(".grid-line")
-                                .data(x.ticks(5))
-                                .enter()
-                                .append("line")
-                                .attr("class", "grid-line")
-                                .attr("x1", d => x(d))
-                                .attr("x2", d => x(d))
-                                .attr("y1", 0)
-                                .attr("y2", height);
-
-                            // Axes
-                            const xAxis = d3.axisBottom(x)
-                                .ticks(5)
-                                .tickFormat(d => `Year ${d}`);
-                            
-                            const yAxis = d3.axisLeft(y);
-
-                            // Draw axes
-                            svg
-                                .append("g")
-                                .attr("class", "axis x-axis")
-                                .attr("transform", `translate(0, ${height})`)
-                                .call(xAxis)
-                                .selectAll("text")
-                                .style("font-weight", "600");
-
-                            svg
-                                .append("g")
-                                .attr("class", "axis y-axis")
-                                .call(yAxis)
-                                .selectAll("text")
-                                .style("font-weight", "700")
-                                .style("font-size", "13px")
-                                .style("fill", "#1a202c");
-
-                            // X-axis label
-                            svg
-                                .append("text")
-                                .attr("class", "axis-label")
-                                .attr("x", width / 2)
-                                .attr("y", height + margin.bottom - 10)
-                                .attr("text-anchor", "middle")
-                                .text("Timeline (Conceptual Duration)");
-
-                            // Bars with animation
-                            const bars = svg
-                                .selectAll(".bar")
-                                .data(data)
-                                .enter()
-                                .append("rect")
-                                .attr("class", "bar")
-                                .attr("x", d => x(d.start))
-                                .attr("y", d => y(d.phase))
-                                .attr("width", 0)
-                                .attr("height", y.bandwidth())
-                                .attr("rx", 6)
-                                .attr("fill", d => d.color)
-                                .style("filter", "url(#glow)")
-                                .style("opacity", 0.9);
-
-                            // Animate bars
-                            bars.transition()
-                                .duration(1200)
-                                .delay((d, i) => i * 200)
-                                .attr("width", d => x(d.end) - x(d.start))
-                                .style("opacity", 1);
-
-                            // Bar labels
-                            const labels = svg
-                                .selectAll(".bar-label")
-                                .data(data)
-                                .enter()
-                                .append("text")
-                                .attr("class", "bar-label")
-                                .attr("x", d => x(d.start) + (x(d.end) - x(d.start)) / 2)
-                                .attr("y", d => y(d.phase) + y.bandwidth() / 2)
-                                .attr("text-anchor", "middle")
-                                .style("opacity", 0);
-
-                            labels.append("tspan")
-                                .attr("x", d => x(d.start) + (x(d.end) - x(d.start)) / 2)
-                                .attr("dy", "-0.3em")
-                                .text(d => d.label)
-                                .style("font-size", "14px");
-
-                            labels.append("tspan")
-                                .attr("x", d => x(d.start) + (x(d.end) - x(d.start)) / 2)
-                                .attr("dy", "1.4em")
-                                .text(d => `${d.start}–${d.end} years`)
-                                .style("font-size", "11px")
-                                .style("opacity", "0.95");
-
-                            // Animate labels
-                            labels.transition()
-                                .duration(600)
-                                .delay(1500)
-                                .style("opacity", 1);
-
-                            // Bar hover effects
-                            bars.on("mouseenter", function(event, d) {
-                                d3.select(this)
-                                    .transition()
-                                    .duration(200)
-                                    .attr("height", y.bandwidth() * 1.1)
-                                    .attr("y", d => y(d.phase) - (y.bandwidth() * 0.1) / 2)
-                                    .style("opacity", 1);
-
-                                // Highlight corresponding card
-                                const phaseIndex = data.indexOf(d) + 1;
-                                document.querySelectorAll('.phase-card').forEach(card => {
-                                    if (card.dataset.phase == phaseIndex) {
-                                        card.classList.add('active');
-                                    }
-                                });
-                            });
-
-                            bars.on("mouseleave", function(event, d) {
-                                d3.select(this)
-                                    .transition()
-                                    .duration(200)
-                                    .attr("height", y.bandwidth())
-                                    .attr("y", d => y(d.phase))
-                                    .style("opacity", 0.9);
-
-                                // Remove highlight
-                                document.querySelectorAll('.phase-card').forEach(card => {
-                                    card.classList.remove('active');
-                                });
-                            });
-
-                            // Phase card interactions
-                            document.querySelectorAll('.phase-card').forEach(card => {
-                                card.addEventListener('click', function() {
-                                    const phaseNum = parseInt(this.dataset.phase);
-                                    
-                                    document.querySelectorAll('.phase-card').forEach(c => {
-                                        c.classList.remove('active');
-                                    });
-                                    this.classList.add('active');
-
-                                    // Highlight corresponding bar
-                                    bars.style("opacity", (d, i) => i === phaseNum - 1 ? 1 : 0.5);
-                                    
-                                    setTimeout(() => {
-                                        bars.style("opacity", 0.9);
-                                    }, 2000);
-                                });
-                            });
-
-                            // Handle window resize
-                            function handleResize() {
-                                const newWidth = container.offsetWidth - margin.left - margin.right;
-                                
-                                // Update SVG dimensions
-                                svg.attr("width", newWidth + margin.left + margin.right)
-                                   .attr("viewBox", `0 0 ${newWidth + margin.left + margin.right} ${height + margin.top + margin.bottom}`);
-                                
-                                // Update x-scale range
-                                x.range([0, newWidth]);
-                                
-                                // Update x-axis
-                                svg.select(".x-axis")
-                                    .attr("transform", `translate(0, ${height})`)
-                                    .call(xAxis);
-                                
-                                // Update bars
-                                bars.attr("x", d => x(d.start))
-                                    .attr("width", d => x(d.end) - x(d.start));
-                                
-                                // Update grid lines
-                                svg.selectAll(".grid-line")
-                                    .attr("x1", d => x(d))
-                                    .attr("x2", d => x(d));
-                                
-                                // Update labels
-                                labels.attr("x", d => x(d.start) + (x(d.end) - x(d.start)) / 2);
-                                labels.selectAll("tspan")
-                                    .attr("x", d => x(d.start) + (x(d.end) - x(d.start)) / 2);
-                                
-                                // Update x-axis label
-                                svg.select(".axis-label")
-                                    .attr("x", newWidth / 2);
-                            }
-
-                            // Add resize event listener
-                            window.addEventListener('resize', handleResize);
-                        });
-                    </script>
-                </div>
-            </div>
-        </section>
-
-        <!-- RACI Matrix Section -->
-        <section id="raci-matrix" class="section">
-            <div class="container">
-                <h2>Project RACI Matrix</h2>
                 <div class="card">
                     <div class="raci-container">
                         <div class="header">
@@ -1811,35 +1361,56 @@
                 <h2>Stakeholder Mapping</h2>
                 <div class="card">
                     <div class="hybrid-diagram">
+                        <div class="instruction-text">
+                            Click the phase bars below to switch between phases
+                        </div>
+                        
                         <div class="hybrid-title">
                             <h3>Hybrid Methodology</h3>
                             <span>Agile development &amp; testing with Stage Gate governance</span>
                         </div>
 
-                        <!-- stepper timeline -->
-                        <div class="hybrid-stepper">
-                            <div class="step active">
-                                <div class="step-circle">1</div>
-                                <div class="step-label">
-                                    First Phase
-                                    <span>MVP • Years 0–2</span>
+                        <div class="phase-bar-chart">
+                            <div class="bar-chart-container">
+                                <div class="phase-bar phase-1-bar active" id="bar1" onclick="switchToPhase(1)">
+                                    <div class="bar-content">
+                                        <div class="bar-number">1</div>
+                                        <div class="bar-info">
+                                            <div class="bar-title">First Phase</div>
+                                            <div class="bar-subtitle">MVP • Years 0–2</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-fill"></div>
+                                </div>
+                                
+                                <div class="phase-bar phase-2-bar" id="bar2" onclick="switchToPhase(2)">
+                                    <div class="bar-content">
+                                        <div class="bar-number">2</div>
+                                        <div class="bar-info">
+                                            <div class="bar-title">Second Phase</div>
+                                            <div class="bar-subtitle">Scaling • Years 3–5</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-fill"></div>
                                 </div>
                             </div>
-                            <div class="step-line"></div>
-                            <div class="step">
-                                <div class="step-circle">2</div>
-                                <div class="step-label">
-                                    Second Phase
-                                    <span>Scaling • Years 3–5</span>
-                                </div>
+                            
+                            <div class="timeline-scale">
+                                <span>Year 0</span>
+                                <span>Year 1</span>
+                                <span>Year 2</span>
+                                <span>Year 3</span>
+                                <span>Year 4</span>
+                                <span>Year 5</span>
                             </div>
                         </div>
 
-                        <div class="hybrid-core">Core Framework</div>
+                        <div style="text-align: center;">
+                            <div class="hybrid-core">Core Framework</div>
+                        </div>
 
                         <div class="hybrid-flow">
-                            <!-- Phase 1 -->
-                            <div class="phase-card phase-1">
+                            <div class="phase-card phase-1 active" id="phaseCard1">
                                 <div class="phase-header">
                                     <div>
                                         <div class="phase-badge">Phase 1</div>
@@ -1884,14 +1455,11 @@
                                 </div>
                             </div>
 
-                            <!-- Arrow -->
-                            <div class="phase-arrow">
+                            <div class="phase-arrow" id="phaseArrow">
                                 <span></span>
-                                <div class="arrow-label">Transition</div>
                             </div>
 
-                            <!-- Phase 2 -->
-                            <div class="phase-card phase-2">
+                            <div class="phase-card phase-2" id="phaseCard2">
                                 <div class="phase-header">
                                     <div>
                                         <div class="phase-badge">Phase 2</div>
@@ -1939,15 +1507,7 @@
                             position: relative;
                             animation: fadeIn 0.6s ease-out;
                             margin: 0 auto;
-                            padding: 2rem 0;
-                        }
-
-                        .hybrid-diagram::before {
-                            content: "";
-                            position: absolute;
-                            inset: 20% -10%;
-                            background: none;
-                            z-index: -1;
+                            padding: 1rem 0;
                         }
 
                         @keyframes fadeIn {
@@ -1955,99 +1515,187 @@
                             to { opacity: 1; transform: translateY(0); }
                         }
 
+                        .instruction-text {
+                            text-align: center;
+                            color: #667eea;
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                            margin-bottom: 1rem;
+                            padding: 0.5rem;
+                            background: #e8eaf6;
+                            border-radius: 999px;
+                            max-width: 350px;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+
                         .hybrid-title {
                             text-align: center;
-                            margin-bottom: 1.5rem;
+                            margin-bottom: 1rem;
                         }
 
                         .hybrid-title h3 {
-                            font-size: 1.6rem;
+                            font-size: 1.3rem;
                             font-weight: 700;
                             color: #1f2933;
-                            margin-bottom: 0.35rem;
+                            margin-bottom: 0.25rem;
                         }
 
                         .hybrid-title span {
-                            font-size: 1rem;
+                            font-size: 0.9rem;
                             font-weight: 400;
                             color: #546e7a;
                             display: block;
                         }
 
-                        .hybrid-stepper {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            gap: 1.5rem;
-                            margin-bottom: 1.75rem;
+                        .phase-bar-chart {
+                            max-width: 800px;
+                            margin: 0 auto 1.5rem;
+                            padding: 1rem;
+                            background: #f8fafc;
+                            border-radius: 12px;
                         }
 
-                        .step {
+                        .bar-chart-container {
                             display: flex;
                             flex-direction: column;
-                            align-items: center;
-                            gap: 0.25rem;
+                            gap: 1rem;
+                            margin-bottom: 0.75rem;
                         }
 
-                        .step-circle {
-                            width: 38px;
-                            height: 38px;
-                            border-radius: 999px;
-                            background: white;
-                            border: 2px solid #9fa8da;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 600;
-                            color: #3949ab;
-                            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-                        }
-
-                        .step.active .step-circle {
-                            background: #667eea;
-                            color: white;
-                            border-color: transparent;
-                        }
-
-                        .step-label {
-                            font-size: 0.85rem;
-                            text-align: center;
-                            color: #455a64;
-                        }
-
-                        .step-label span {
-                            display: block;
-                            font-size: 0.78rem;
-                            color: #78909c;
-                        }
-
-                        .step-line {
-                            flex: 0 0 140px;
-                            height: 3px;
-                            border-radius: 999px;
-                            background: #e8eaf6;
+                        .phase-bar {
                             position: relative;
+                            height: 60px;
+                            background: white;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            transition: all 0.4s ease;
+                            border: 2px solid #e0e7ff;
                             overflow: hidden;
                         }
 
-                        .step-line::after {
-                            content: "";
+                        .phase-bar:hover {
+                            transform: translateX(5px);
+                            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+                            border-color: #667eea;
+                        }
+
+                        .phase-bar.active {
+                            border-color: #667eea;
+                            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+                        }
+
+                        .phase-bar.completed {
+                            border-color: #4caf50;
+                        }
+
+                        .bar-fill {
                             position: absolute;
-                            inset: 0;
+                            left: 0;
+                            top: 0;
+                            height: 100%;
+                            background: #e8eaf6;
+                            transition: width 0.6s ease;
+                            z-index: 0;
+                        }
+
+                        .phase-1-bar .bar-fill {
+                            width: 40%; /* 2 years out of 5 */
+                        }
+
+                        .phase-2-bar .bar-fill {
+                            width: 60%; /* 3 years out of 5 */
+                        }
+
+                        .phase-bar.active .bar-fill {
+                            background: rgba(102, 126, 234, 0.15);
+                        }
+
+                        .phase-bar.completed .bar-fill {
+                            background: rgba(76, 175, 80, 0.15);
+                        }
+
+                        .bar-content {
+                            position: relative;
+                            z-index: 1;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            padding: 0 1rem;
+                            gap: 0.75rem;
+                        }
+
+                        .bar-number {
+                            width: 40px;
+                            height: 40px;
                             background: #667eea;
-                            transform-origin: left;
-                            transform: scaleX(0.6);
+                            color: white;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            flex-shrink: 0;
+                            transition: all 0.3s ease;
+                        }
+
+                        .phase-2-bar .bar-number {
+                            background: #764ba2;
+                        }
+
+                        .phase-bar.completed .bar-number {
+                            background: #4caf50;
+                        }
+
+                        .phase-bar.completed .bar-number::after {
+                            content: " ✓";
+                            font-size: 1rem;
+                        }
+
+                        .bar-info {
+                            flex: 1;
+                        }
+
+                        .bar-title {
+                            font-size: 0.95rem;
+                            font-weight: 700;
+                            color: #1f2933;
+                            margin-bottom: 0.2rem;
+                        }
+
+                        .phase-bar.active .bar-title {
+                            color: #667eea;
+                        }
+
+                        .bar-subtitle {
+                            font-size: 0.75rem;
+                            color: #78909c;
+                            font-weight: 500;
+                        }
+
+                        .timeline-scale {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0 1rem;
+                            margin-top: 0.5rem;
+                        }
+
+                        .timeline-scale span {
+                            font-size: 0.7rem;
+                            color: #90a4ae;
+                            font-weight: 600;
                         }
 
                         .hybrid-core {
                             text-align: center;
                             background: #667eea;
                             color: white;
-                            padding: 0.7rem 1.8rem;
+                            padding: 0.5rem 1.5rem;
                             border-radius: 999px;
                             font-weight: 600;
-                            font-size: 1.05rem;
-                            margin: 0 auto 2.1rem;
+                            font-size: 0.95rem;
+                            margin: 0 auto 1.5rem;
                             display: inline-block;
                             box-shadow: 0 8px 18px rgba(102, 126, 234, 0.3);
                         }
@@ -2056,7 +1704,7 @@
                             display: grid;
                             grid-template-columns: 1.3fr auto 1.1fr;
                             align-items: stretch;
-                            gap: 1.5rem;
+                            gap: 1rem;
                             animation: slideUp 0.6s ease-out 0.15s both;
                         }
 
@@ -2067,23 +1715,44 @@
 
                         .phase-card {
                             background: white;
-                            border-radius: 20px;
-                            padding: 1.7rem 1.9rem;
+                            border-radius: 16px;
+                            padding: 1.3rem 1.5rem;
                             box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
                             position: relative;
                             overflow: hidden;
+                            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                            opacity: 0.4;
+                            transform: scale(0.95);
+                        }
+
+                        .phase-card.active {
+                            opacity: 1;
+                            transform: scale(1);
+                            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.25);
+                        }
+
+                        .phase-card.completed {
+                            opacity: 0.7;
                         }
 
                         .phase-card::after {
                             content: "";
                             position: absolute;
-                            right: -40px;
-                            bottom: -40px;
-                            width: 110px;
-                            height: 110px;
+                            right: -30px;
+                            bottom: -30px;
+                            width: 90px;
+                            height: 90px;
                             border-radius: 50%;
                             background: rgba(102,126,234,0.16);
                             pointer-events: none;
+                            transition: all 0.5s ease;
+                        }
+
+                        .phase-card.active::after {
+                            width: 120px;
+                            height: 120px;
+                            right: -40px;
+                            bottom: -40px;
                         }
 
                         .phase-2::after {
@@ -2094,19 +1763,25 @@
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            gap: 0.75rem;
-                            margin-bottom: 1.2rem;
+                            gap: 0.5rem;
+                            margin-bottom: 0.9rem;
                         }
 
                         .phase-badge {
-                            font-size: 0.78rem;
-                            padding: 0.25rem 0.7rem;
+                            font-size: 0.7rem;
+                            padding: 0.2rem 0.6rem;
                             border-radius: 999px;
                             background: #e8eaf6;
                             color: #3949ab;
                             font-weight: 600;
                             letter-spacing: 0.03em;
                             text-transform: uppercase;
+                            transition: all 0.3s;
+                        }
+
+                        .phase-card.active .phase-badge {
+                            background: #667eea;
+                            color: white;
                         }
 
                         .phase-2 .phase-badge {
@@ -2114,20 +1789,25 @@
                             color: #6a1b9a;
                         }
 
+                        .phase-2.active .phase-badge {
+                            background: #764ba2;
+                            color: white;
+                        }
+
                         .phase-duration {
-                            font-size: 0.8rem;
+                            font-size: 0.75rem;
                             color: #78909c;
                             display: flex;
                             align-items: center;
-                            gap: 0.25rem;
+                            gap: 0.2rem;
                         }
 
                         .phase-duration span {
-                            font-size: 1rem;
+                            font-size: 0.9rem;
                         }
 
                         .phase-card h4 {
-                            font-size: 1.3rem;
+                            font-size: 1.15rem;
                             font-weight: 700;
                             color: #1f2933;
                         }
@@ -2136,11 +1816,31 @@
                         .phase-2 h4 { color: #7b1fa2; }
 
                         .phase-section {
-                            margin-top: 1.1rem;
-                            padding: 0.6rem 0.8rem;
-                            border-radius: 0.9rem;
+                            margin-top: 0.8rem;
+                            padding: 0.5rem 0.7rem;
+                            border-radius: 0.7rem;
                             background: #f8fafc;
                             border: 1px dashed #e0e7ff;
+                            opacity: 0;
+                            transform: translateX(-20px);
+                            transition: all 0.5s ease;
+                        }
+
+                        .phase-card.active .phase-section {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+
+                        .phase-card.active .phase-section:nth-child(2) {
+                            transition-delay: 0.1s;
+                        }
+
+                        .phase-card.active .phase-section:nth-child(3) {
+                            transition-delay: 0.2s;
+                        }
+
+                        .phase-card.active .phase-section:nth-child(4) {
+                            transition-delay: 0.3s;
                         }
 
                         .phase-2 .phase-section {
@@ -2149,17 +1849,17 @@
                         }
 
                         .phase-section-title {
-                            font-size: 0.86rem;
+                            font-size: 0.8rem;
                             font-weight: 600;
                             color: #455a64;
-                            margin-bottom: 0.3rem;
+                            margin-bottom: 0.25rem;
                             display: flex;
                             align-items: center;
-                            gap: 0.35rem;
+                            gap: 0.3rem;
                         }
 
                         .phase-section-title span.icon {
-                            font-size: 1rem;
+                            font-size: 0.9rem;
                         }
 
                         .phase-card ul {
@@ -2169,21 +1869,21 @@
                         }
 
                         .phase-card li {
-                            font-size: 0.9rem;
-                            line-height: 1.55;
+                            font-size: 0.82rem;
+                            line-height: 1.45;
                             color: #546e7a;
-                            padding-left: 1.1rem;
+                            padding-left: 1rem;
                             position: relative;
-                            margin: 0.2rem 0;
+                            margin: 0.15rem 0;
                         }
 
                         .phase-card li::before {
                             content: "";
                             position: absolute;
                             left: 0;
-                            top: 0.55rem;
-                            width: 6px;
-                            height: 6px;
+                            top: 0.5rem;
+                            width: 5px;
+                            height: 5px;
                             border-radius: 999px;
                             background: #5c6bc0;
                         }
@@ -2193,15 +1893,15 @@
                         }
 
                         .phase-card li.sub {
-                            font-size: 0.86rem;
+                            font-size: 0.78rem;
                             color: #78909c;
-                            padding-left: 1.4rem;
+                            padding-left: 1.2rem;
                         }
 
                         .phase-card li.sub::before {
-                            width: 4px;
-                            height: 4px;
-                            top: 0.6rem;
+                            width: 3px;
+                            height: 3px;
+                            top: 0.52rem;
                             background: #b0bec5;
                         }
 
@@ -2215,25 +1915,19 @@
                         .phase-arrow span {
                             width: 0;
                             height: 0;
-                            border-top: 60px solid transparent;
-                            border-bottom: 60px solid transparent;
-                            border-left: 95px solid #e0e7ff;
+                            border-top: 45px solid transparent;
+                            border-bottom: 45px solid transparent;
+                            border-left: 70px solid #e0e7ff;
                             filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
-                            animation: pulse 2.2s ease-in-out infinite;
+                            transition: all 0.5s ease;
                         }
 
-                        .arrow-label {
-                            position: absolute;
-                            writing-mode: vertical-rl;
-                            text-orientation: mixed;
-                            font-size: 0.78rem;
-                            letter-spacing: 0.18em;
-                            text-transform: uppercase;
-                            color: #9fa8da;
-                            font-weight: 600;
+                        .phase-arrow.active span {
+                            border-left-color: #667eea;
+                            animation: pulse-arrow 2s ease-in-out infinite;
                         }
 
-                        @keyframes pulse {
+                        @keyframes pulse-arrow {
                             0%, 100% { transform: scale(1); opacity: 1; }
                             50% { transform: scale(1.04); opacity: 0.92; }
                         }
@@ -2245,47 +1939,301 @@
 
                             .phase-arrow {
                                 order: 2;
-                                padding: 0.75rem 0;
+                                padding: 0.5rem 0;
                             }
 
                             .phase-arrow span {
                                 transform: rotate(90deg);
                             }
 
-                            .arrow-label {
-                                position: static;
-                                writing-mode: horizontal-tb;
-                                text-orientation: initial;
-                                margin-left: 0.5rem;
+                            .phase-bar-chart {
+                                padding: 0.75rem;
+                            }
+
+                            .phase-bar {
+                                height: 55px;
+                            }
+
+                            .bar-content {
+                                padding: 0 0.75rem;
+                            }
+
+                            .bar-number {
+                                width: 35px;
+                                height: 35px;
+                                font-size: 1.1rem;
                             }
                         }
 
                         @media (max-width: 600px) {
                             .hybrid-diagram {
-                                padding: 1.2rem 0;
+                                padding: 0.75rem 0;
                             }
 
                             .hybrid-title h3 {
-                                font-size: 1.35rem;
-                            }
-
-                            .hybrid-title span {
-                                font-size: 0.9rem;
-                            }
-
-                            .phase-card {
-                                padding: 1.3rem 1.4rem;
-                            }
-
-                            .phase-card h4 {
                                 font-size: 1.15rem;
                             }
 
-                            .phase-card li {
-                                font-size: 0.86rem;
+                            .phase-card {
+                                padding: 1rem 1.2rem;
+                            }
+
+                            .phase-bar {
+                                height: 50px;
+                            }
+
+                            .bar-title {
+                                font-size: 0.85rem;
+                            }
+
+                            .bar-subtitle {
+                                font-size: 0.7rem;
+                            }
+
+                            .timeline-scale {
+                                padding: 0 0.5rem;
+                            }
+
+                            .timeline-scale span {
+                                font-size: 0.6rem;
                             }
                         }
                     </style>
+                    
+                    <script>
+                        // State management
+                        let currentPhase = 1;
+
+                        // Initialize
+                        document.addEventListener('DOMContentLoaded', () => {
+                            switchToPhase(1);
+                        });
+
+                        // Phase switching
+                        function switchToPhase(phase) {
+                            currentPhase = phase;
+                            
+                            // Update bars
+                            document.querySelectorAll('.phase-bar').forEach(bar => {
+                                bar.classList.remove('active');
+                            });
+                            document.getElementById(`bar${phase}`).classList.add('active');
+                            
+                            // Mark completed bars
+                            if (phase === 2) {
+                                document.getElementById('bar1').classList.add('completed');
+                            } else {
+                                document.getElementById('bar1').classList.remove('completed');
+                            }
+                            
+                            // Update phase cards
+                            document.querySelectorAll('.phase-card').forEach(card => {
+                                card.classList.remove('active');
+                            });
+                            document.getElementById(`phaseCard${phase}`).classList.add('active');
+                            
+                            // Update arrow
+                            if (phase === 2) {
+                                document.getElementById('phaseArrow').classList.add('active');
+                            } else {
+                                document.getElementById('phaseArrow').classList.remove('active');
+                            }
+                            
+                            // Mark completed phases
+                            if (phase === 2) {
+                                document.getElementById('phaseCard1').classList.add('completed');
+                            } else {
+                                document.getElementById('phaseCard1').classList.remove('completed');
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stakeholders Interaction Section -->
+        <section id="Stakeholders-Interaction" class="section">
+            <div class="container">
+                <h2>Stakeholders Interaction</h2>
+                <div class="card">
+                    <div style="padding: 2rem; line-height: 1.6; color: #34495e;">
+                        <p>HearOnly product success will largely depend on meeting regulatory and social requirements, while excelling in the tech space.</p>
+                        
+                        <style>
+                            .power-interest-matrix {
+                                margin-top: 2rem;
+                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                            }
+                            .matrix-wrapper {
+                                position: relative;
+                                padding-left: 60px;
+                                padding-bottom: 60px;
+                                margin: 2rem 0;
+                            }
+                            .y-axis-label {
+                                position: absolute;
+                                left: 0;
+                                top: 50%;
+                                transform: rotate(-90deg) translateX(-50%);
+                                transform-origin: left center;
+                                font-weight: 600;
+                                color: #666;
+                                font-size: 14px;
+                                white-space: nowrap;
+                            }
+                            .y-axis-range {
+                                position: absolute;
+                                left: 30px;
+                                top: 50%;
+                                transform: rotate(-90deg) translateX(-50%);
+                                transform-origin: left center;
+                                color: #999;
+                                font-size: 13px;
+                                white-space: nowrap;
+                            }
+                            .x-axis-label {
+                                text-align: center;
+                                margin-top: 20px;
+                                font-weight: 600;
+                                color: #666;
+                                font-size: 14px;
+                            }
+                            .x-axis-range {
+                                text-align: center;
+                                color: #999;
+                                font-size: 13px;
+                                margin-top: 5px;
+                                margin-bottom: 20px;
+                            }
+                            .matrix-grid {
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 0;
+                                border: 2px solid #333;
+                            }
+                            .quadrant {
+                                padding: 20px;
+                                min-height: 250px;
+                                border: 1px solid #ddd;
+                            }
+                            .quadrant-header {
+                                font-size: 1.2em;
+                                font-weight: 700;
+                                margin-bottom: 15px;
+                                color: white;
+                                padding: 10px;
+                                text-align: center;
+                                border-radius: 4px;
+                            }
+                            .satisfy { background: #000; }
+                            .engage { background: #d32f2f; }
+                            .monitor { background: #1976d2; }
+                            .inform { background: #757575; }
+                            .quadrant-content {
+                                color: #333;
+                                line-height: 1.6;
+                            }
+                            .quadrant-description {
+                                margin-bottom: 15px;
+                                font-size: 14px;
+                            }
+                            .stakeholder-list {
+                                list-style: none;
+                                padding-left: 0;
+                                margin: 0;
+                            }
+                            .stakeholder-list li {
+                                padding-left: 20px;
+                                position: relative;
+                                margin-bottom: 8px;
+                                font-size: 13px;
+                            }
+                            .stakeholder-list li:before {
+                                content: "•";
+                                position: absolute;
+                                left: 5px;
+                                font-weight: bold;
+                            }
+                            @media (max-width: 768px) {
+                                .matrix-grid {
+                                    grid-template-columns: 1fr;
+                                }
+                                .matrix-wrapper {
+                                    padding-left: 40px;
+                                    padding-bottom: 40px;
+                                }
+                                .quadrant {
+                                    min-height: auto;
+                                    padding: 15px;
+                                }
+                            }
+                        </style>
+
+                        <div class="power-interest-matrix">
+                            <h3 style="margin-bottom: 1.5rem; color: #2c3e50; font-size: 1.3rem;">Power Interest Matrix</h3>
+                            
+                            <div class="matrix-wrapper">
+                                <div class="y-axis-label">Level of stakeholder interest</div>
+                                <div class="y-axis-range">Low to High</div>
+                                
+                                <div class="matrix-grid">
+                                    <!-- Top Left: Satisfy -->
+                                    <div class="quadrant">
+                                        <div class="quadrant-header satisfy">Satisfy</div>
+                                        <div class="quadrant-content">
+                                            <p class="quadrant-description">Establish a communication process by providing opportunities to share relevant information or concerns</p>
+                                            <ul class="stakeholder-list">
+                                                <li>Compliance</li>
+                                                <li>Legal</li>
+                                                <li>Key strategic partners</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Top Right: Engage -->
+                                    <div class="quadrant">
+                                        <div class="quadrant-header engage">Engage</div>
+                                        <div class="quadrant-content">
+                                            <p class="quadrant-description">Closely involved in project decision making process to ensure buy-in and alignment with project goals and objectives</p>
+                                            <ul class="stakeholder-list">
+                                                <li>Executive Sponsor</li>
+                                                <li>Project Steering Committee</li>
+                                                <li>Design and Engineering Team</li>
+                                                <li>Regulatory Authorities (i.e.; GDPR)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bottom Left: Monitor -->
+                                    <div class="quadrant">
+                                        <div class="quadrant-header monitor">Monitor</div>
+                                        <div class="quadrant-content">
+                                            <p class="quadrant-description">Create periodical connect points or via general communication</p>
+                                            <ul class="stakeholder-list">
+                                                <li>External Suppliers</li>
+                                                <li>Media and Public Opinion Groups</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bottom Right: Inform -->
+                                    <div class="quadrant">
+                                        <div class="quadrant-header inform">Inform</div>
+                                        <div class="quadrant-content">
+                                            <p class="quadrant-description">Ensure that are kept in the loop and consulted on selected interest areas to meet their need, can be potential supporters</p>
+                                            <ul class="stakeholder-list">
+                                                <li>Customers</li>
+                                                <li>Marketing and Customer Department</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="x-axis-label">Level of stakeholder power/influence</div>
+                                <div class="x-axis-range">Low to High</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2295,274 +2243,95 @@
             <div class="container">
                 <h2>Organization Structure</h2>
                 <div class="card">
-                    <div class="org-chart">
-                        <!-- Executive Sponsor -->
-                        <div class="org-level">
-                            <div class="org-box executive">
-                                <div class="title">Executive Sponsor</div>
-                                <div class="role">Chief Transformation Officer (CTO)</div>
+                    <div class="org-structure-content" style="padding: 2rem;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <div class="org-section" style="margin-bottom: 2rem;">
+                                    <h3 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Strategic Governance</h3>
+                                    <p style="line-height: 1.6; color: #34495e; margin-bottom: 1rem;">
+                                        Executive Sponsor and the Steering Committee function as the strategic governing body responsible for maintaining alignment between the project's objectives and the organization's innovation strategy.
+                                    </p>
+                                </div>
+
+                                <div class="org-section" style="margin-bottom: 2rem;">
+                                    <h3 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Project Management Office (PMO)</h3>
+                                    <p style="line-height: 1.6; color: #34495e; margin-bottom: 1rem;">
+                                        PMO acts as an integrator across all the functions and drives project governance.
+                                    </p>
+                                </div>
+
+                                <div class="org-section" style="margin-bottom: 2rem;">
+                                    <h3 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Operational Coordination</h3>
+                                    <p style="line-height: 1.6; color: #34495e; margin-bottom: 1rem;">
+                                        Cross-functional leads representing supply chain, finance, IT, compliance and legal, and marketing/customer experience.
+                                    </p>
+                                </div>
+
+                                <div class="org-section" style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4a6fa5;">
+                                    <h4 style="color: #2c3e50; margin-top: 0; margin-bottom: 0.8rem; font-size: 1.1rem;">Governance Framework</h4>
+                                    <p style="line-height: 1.6; color: #34495e; margin: 0;">
+                                        PMO will prepare a RACI framework, specifying who is "Responsible, Accountable, Consulted and Informed" for the major project tasks and deliverables.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Steering Committee -->
-                        <div class="connection-wrapper">
-                            <div class="org-box steering">
-                                Steering Committee
+                            
+                            <div style="flex: 1; min-width: 300px; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                                <img src="images/Screenshot 2025-12-08 073806.png" alt="Organization Structure Chart" class="org-chart-img" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: zoom-in; transition: transform 0.3s ease;">
                             </div>
-                        </div>
-
-                        <!-- Functional Leads -->
-                        <div class="label">Strategic Oversight and Funding</div>
-                        <div class="org-level">
-                            <div class="org-row">
-                                <div class="org-box functional-lead">Project Management<br>Office (PMO)</div>
-                                <div class="org-box functional-lead">Supply Chain<br>Lead</div>
-                                <div class="org-box functional-lead">Finance Lead</div>
-                                <div class="org-box functional-lead">IT Lead</div>
-                                <div class="org-box functional-lead">Compliance &<br>Legal Lead</div>
-                                <div class="org-box functional-lead">Marketing &<br>Customer<br>Experience Lead</div>
+                            
+                            <!-- Image Modal -->
+                            <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; animation: fadeIn 0.3s ease;">
+                                <span style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; text-shadow: 0 0 5px rgba(0,0,0,0.5);">&times;</span>
+                                <img id="enlargedImage" style="max-width: 90%; max-height: 90%; object-fit: contain; box-shadow: 0 5px 25px rgba(0,0,0,0.3); border-radius: 4px;">
                             </div>
-                        </div>
-
-                        <!-- Program Manager -->
-                        <div class="connection-wrapper">
-                            <div class="org-box program-manager">
-                                Program Manager
-                            </div>
-                        </div>
-
-                        <!-- Operational Teams -->
-                        <div class="label">Operational Coordination</div>
-                        <div class="org-level">
-                            <div class="org-row">
-                                <div class="org-box team-box">Product<br>Development Team</div>
-                                <div class="org-box team-box">Supply Chain<br>Team</div>
-                                <div class="org-box team-box">Marketing &<br>User Experience<br>Team</div>
-                                <div class="org-box team-box">Compliance, IT & Data<br>Security</div>
-                                <div class="org-box team-box">External<br>Consultants</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <style>
-                        .org-chart {
-                            max-width: 1400px;
-                            width: 100%;
-                            margin: 0 auto;
-                            padding: 1rem 0;
-                        }
-
-                        .org-level {
-                            display: flex;
-                            justify-content: center;
-                            margin-bottom: 2rem;
-                            position: relative;
-                        }
-
-                        .org-box {
-                            background: white;
-                            border-radius: 12px;
-                            padding: 1rem 1.5rem;
-                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                            text-align: center;
-                            position: relative;
-                            transition: all 0.3s ease;
-                            min-width: 180px;
-                        }
-
-                        .org-box:hover {
-                            transform: translateY(-4px);
-                            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-                        }
-
-                        .executive {
-                            background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
-                            color: white;
-                            font-weight: 700;
-                            padding: 1.5rem 2rem;
-                            font-size: 1.1rem;
-                            min-width: 300px;
-                        }
-
-                        .executive .title {
-                            font-size: 0.95rem;
-                            margin-bottom: 0.3rem;
-                            opacity: 0.9;
-                        }
-
-                        .executive .role {
-                            font-size: 1.2rem;
-                        }
-
-                        .steering {
-                            background: #e8eaf6;
-                            border: 2px solid #9fa8da;
-                            font-weight: 600;
-                            color: #3949ab;
-                        }
-
-                        .program-manager {
-                            background: #ffebee;
-                            border: 2px solid #ef9a9a;
-                            font-weight: 600;
-                            color: #c62828;
-                        }
-
-                        .functional-lead {
-                            background: white;
-                            border: 2px solid #ddd;
-                            font-weight: 500;
-                            color: #333;
-                            margin: 0 0.5rem;
-                        }
-
-                        .team-box {
-                            background: white;
-                            border: 1px solid #e0e0e0;
-                            font-size: 0.9rem;
-                            color: #555;
-                            margin: 0 0.5rem;
-                            min-width: 160px;
-                        }
-
-                        .connector-line {
-                            position: absolute;
-                            background: #b0bec5;
-                            z-index: -1;
-                        }
-
-                        .vertical-line {
-                            width: 2px;
-                            height: 40px;
-                            left: 50%;
-                            transform: translateX(-1px);
-                            top: 100%;
-                        }
-
-                        .horizontal-line {
-                            height: 2px;
-                            top: 20px;
-                        }
-
-                        .org-row {
-                            display: flex;
-                            justify-content: center;
-                            align-items: flex-start;
-                            gap: 1rem;
-                            flex-wrap: wrap;
-                        }
-
-                        .label {
-                            text-align: center;
-                            color: #90a4ae;
-                            font-size: 0.85rem;
-                            font-style: italic;
-                            margin: 1.5rem 0 1rem 0;
-                            font-weight: 500;
-                        }
-
-                        .connection-wrapper {
-                            position: relative;
-                            display: flex;
-                            justify-content: center;
-                            margin-bottom: 3rem;
-                        }
-
-                        .connection-wrapper::before {
-                            content: '';
-                            position: absolute;
-                            top: -20px;
-                            left: 50%;
-                            width: 2px;
-                            height: 20px;
-                            background: #b0bec5;
-                            transform: translateX(-1px);
-                        }
-
-                        .connection-wrapper::after {
-                            content: '';
-                            position: absolute;
-                            top: 0;
-                            left: 10%;
-                            right: 10%;
-                            height: 2px;
-                            background: #b0bec5;
-                        }
-
-                        @media (max-width: 1200px) {
-                            .org-row {
-                                flex-direction: column;
-                                align-items: center;
-                            }
-
-                            .functional-lead,
-                            .team-box {
-                                margin: 0.5rem 0;
-                            }
-
-                            .connection-wrapper::after {
-                                display: none;
-                            }
-                        }
-
-                        @media (max-width: 600px) {
-                            .org-chart {
-                                padding: 1rem;
-                            }
-
-                            .executive {
-                                min-width: 250px;
-                                padding: 1.2rem 1.5rem;
-                            }
-
-                            .executive .role {
-                                font-size: 1rem;
-                            }
-
-                            .org-box {
-                                min-width: 150px;
-                                padding: 0.8rem 1rem;
-                                font-size: 0.9rem;
-                            }
-                        }
-                    </style>
-                </div>
-            </div>
-        </section>
-
-        <!-- Roles & Governance Section -->
-        <section id="roles" class="section">
-            <div class="container">
-                <h2>Roles & Governance</h2>
-                <div class="card">
-                    <div class="roles-grid">
-                        <div class="role-card">
-                            <h4>CTO & Steering Committee</h4>
-                            <p>Set strategy, funding, stage-gates, and oversee risk/compliance.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>PMO</h4>
-                            <p>Run planning, schedule, resources, risks, reporting, and coordination.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>Product & Engineering</h4>
-                            <p>Design, build, and test ANC hardware + AI; own technical compliance.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>Supply Chain & Manufacturing</h4>
-                            <p>Manage suppliers, production, quality, logistics, sustainability.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>Marketing & UX</h4>
-                            <p>Go-to-market, user testing, training, and feedback loop.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>Compliance & IT</h4>
-                            <p>Data/privacy compliance, cybersecurity, audits.</p>
-                        </div>
-                        <div class="role-card">
-                            <h4>External Consultants</h4>
-                            <p>Specialized expert support when needed.</p>
+                            
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const modal = document.getElementById('imageModal');
+                                const modalImg = document.getElementById('enlargedImage');
+                                const orgChartImg = document.querySelector('.org-chart-img');
+                                const closeBtn = document.querySelector('#imageModal span');
+                            
+                                // Open modal when clicking the organization chart
+                                orgChartImg.addEventListener('click', function() {
+                                    modal.style.display = 'flex';
+                                    modalImg.src = this.src;
+                                    document.body.style.overflow = 'hidden';
+                                });
+                            
+                                // Close modal when clicking the close button
+                                closeBtn.addEventListener('click', function() {
+                                    modal.style.display = 'none';
+                                    document.body.style.overflow = 'auto';
+                                });
+                            
+                                // Close modal when clicking outside the image
+                                modal.addEventListener('click', function(e) {
+                                    if (e.target === modal) {
+                                        modal.style.display = 'none';
+                                        document.body.style.overflow = 'auto';
+                                    }
+                                });
+                                
+                                // Close with Escape key
+                                document.addEventListener('keydown', function(e) {
+                                    if (e.key === 'Escape' && modal.style.display === 'flex') {
+                                        modal.style.display = 'none';
+                                        document.body.style.overflow = 'auto';
+                                    }
+                                });
+                            });
+                            </script>
+                            
+                            <style>
+                                @keyframes fadeIn {
+                                    from { opacity: 0; }
+                                    to { opacity: 1; }
+                                }
+                                .org-chart-img:hover {
+                                    transform: scale(1.02);
+                                }
+                            </style>
                         </div>
                     </div>
                 </div>
@@ -2600,57 +2369,6 @@
                         </div>
                     </div>
 
-                    <div class="partnership-content">
-                        <div class="partnership-tables">
-                            <div class="table-header">Partnership Strategy & Stakeholder Management</div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Area</th>
-                                        <th>Summary</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>In-House Development</td>
-                                        <td>Keep core AI technology, UX, and data governance internal to protect IP and privacy.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>External Partnerships</td>
-                                        <td>Outsource hardware manufacturing, distribution, and testing. Mixed sourcing improves flexibility and risk management.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Regulatory Planning</td>
-                                        <td>Follow PMI guidance for regulatory approval and market release.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IP & Compliance</td>
-                                        <td>Patent technology, ensure GDPR privacy, and meet safety requirements.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Asset Protection</td>
-                                        <td>Trademark <span class="highlight">HearOnly</span> and copyright firmware, UI, and training data.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contractual Safeguards</td>
-                                        <td>All contracts must include NDAs, licensing limits, and confidentiality clauses.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Internal Collaboration</td>
-                                        <td>Strong coordination across teams supports productive friction and avoids silos.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>External Collaboration</td>
-                                        <td>Open collaboration with partners reduces risk and maintains alignment.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stakeholder Engagement</td>
-                                        <td>Continuous communication prevents confusion and unrealistic expectations.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     
                     <style>
                         .requirements-container {
@@ -2837,6 +2555,1114 @@
                     </style>
                 </div>
             </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section id="Partners" class="section">
+            <div class="container">
+                <h2>Partner vs. In-House Development & Legal Considerations</h2>
+                <div class="development-grid">
+                    <!-- In-House Development -->
+                    <div class="section-card" id="inhouse" onclick="toggleSection('inhouse')">
+                        <div class="section-header">
+                            <div class="section-icon">🏢</div>
+                            <div class="section-title">
+                                <h3>In-House Development</h3>
+                                <span class="subtitle">Core Innovation & Internal Control</span>
+                            </div>
+                            <div class="expand-icon">▼</div>
+                        </div>
+
+                        <div class="section-content">
+                            <div class="content-block">
+                                <h4><span class="emoji">💡</span> Core Innovation (Internal)</h4>
+                                <div class="content-box">
+                                    <ul class="content-list">
+                                        <li>AI-driven selective hearing engine</li>
+                                        <li>Adaptive filtering algorithms</li>
+                                        <li>UX design</li>
+                                        <li>Data governance</li>
+                                        <li>Software integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="content-block">
+                                <h4><span class="emoji">🎯</span> Strategic Benefits</h4>
+                                <ul class="content-list">
+                                    <li>Maintains control of intellectual property</li>
+                                    <li>Protects user trust and privacy</li>
+                                    <li>Enables continuous improvement through internal testing</li>
+                                    <li>Leverages stakeholder feedback directly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- External Partnerships -->
+                    <div class="section-card external" id="external" onclick="toggleSection('external')">
+                        <div class="section-header">
+                            <div class="section-icon">🤝</div>
+                            <div class="section-title">
+                                <h3>External Partnerships</h3>
+                                <span class="subtitle">Outsourced & Consultant Services</span>
+                            </div>
+                            <div class="expand-icon">▼</div>
+                        </div>
+
+                        <div class="section-content">
+                            <div class="content-block">
+                                <h4><span class="emoji">🏭</span> Outsourced Services</h4>
+                                <div class="content-box">
+                                    <ul class="content-list">
+                                        <li>Hardware manufacturing</li>
+                                        <li>Acoustic component sourcing</li>
+                                        <li>Global distribution</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="content-block">
+                                <h4><span class="emoji">👥</span> External Consultants</h4>
+                                <div class="content-box">
+                                    <ul class="content-list">
+                                        <li>Acoustic compliance testing</li>
+                                        <li>Performance calibration</li>
+                                        <li>Regulatory certification</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="content-block">
+                                <h4><span class="emoji">✨</span> Partnership Advantages</h4>
+                                <ul class="content-list">
+                                    <li>Flexibility in scaling operations</li>
+                                    <li>Operational efficiency gains</li>
+                                    <li>Risk reduction through specialization</li>
+                                    <li>Alignment with stage-gate governance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Considerations -->
+                <div class="legal-section" id="legal" onclick="toggleSection('legal')">
+                    <div class="legal-header">
+                        <div class="legal-icon">⚖️</div>
+                        <div class="legal-title">
+                            <h3>Legal Considerations</h3>
+                            <span class="subtitle">Compliance, Protection & Risk Management</span>
+                        </div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+
+                    <div class="legal-content">
+                        <div class="quote-box">
+                            <div class="source">PMI (2021):</div>
+                            <div class="text">"Regulatory agencies or statutes may require specific planning documents before granting permission to proceed or before releasing the project deliverable into the market."</div>
+                        </div>
+
+                        <div class="legal-grid">
+                            <div class="legal-box">
+                                <h4>🔐 Key Priorities</h4>
+                                <ul>
+                                    <li>Patent selective-hearing technology</li>
+                                    <li>Ensure GDPR-aligned data privacy</li>
+                                    <li>Secure consumer-safety compliance</li>
+                                </ul>
+                            </div>
+
+                            <div class="legal-box">
+                                <h4>🛡️ Asset Protection</h4>
+                                <ul>
+                                    <li>Trademark HearOnly</li>
+                                    <li>Copyright firmware</li>
+                                    <li>Copyright UI designs</li>
+                                    <li>Copyright training data</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="content-block" style="margin-top: 1.5rem;">
+                            <div class="content-box" style="border-left-color: #f59e0b;">
+                                <h4 style="color: #78350f; margin-bottom: 0.75rem;">📋 Partner Contract Requirements</h4>
+                                <p style="color: #92400e; line-height: 1.6; margin-bottom: 0.5rem;">
+                                    All partner contracts must include the following clauses to safeguard proprietary methods and prevent unauthorized sharing:
+                                </p>
+                                <ul class="content-list" style="margin-top: 0.75rem;">
+                                    <li style="color: #92400e;">Non-Disclosure Agreements (NDAs)</li>
+                                    <li style="color: #92400e;">Licensing restrictions</li>
+                                    <li style="color: #92400e;">Confidentiality clauses</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                .development-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                    margin: 2rem 0;
+                }
+
+                .section-card {
+                    background: #f8fafc;
+                    border-radius: 16px;
+                    padding: 2rem;
+                    border: 2px solid #e0e7ff;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                }
+
+                .section-card:hover {
+                    border-color: #667eea;
+                    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+                    transform: translateY(-4px);
+                }
+
+                .section-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .section-icon {
+                    width: 50px;
+                    height: 50px;
+                    background: #667eea;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    color: white;
+                }
+
+                .section-card.external .section-icon {
+                    background: #764ba2;
+                }
+
+                .section-title h3 {
+                    font-size: 1.4rem;
+                    color: #1f2933;
+                    margin-bottom: 0.25rem;
+                }
+
+                .subtitle {
+                    font-size: 0.85rem;
+                    color: #78909c;
+                    font-weight: 500;
+                }
+
+                .section-content {
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.5s ease;
+                }
+
+                .section-card.expanded .section-content {
+                    max-height: 1000px;
+                }
+
+                .content-block {
+                    margin-bottom: 1.5rem;
+                }
+
+                .content-box {
+                    background: white;
+                    border-radius: 8px;
+                    padding: 1.2rem;
+                    margin-top: 1rem;
+                    border-left: 4px solid #667eea;
+                }
+
+                .content-list {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .content-list li {
+                    padding: 0.6rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                    color: #546e7a;
+                    line-height: 1.6;
+                }
+
+                .content-list li::before {
+                    content: "•";
+                    position: absolute;
+                    left: 0;
+                    color: #667eea;
+                    font-weight: bold;
+                }
+
+                .legal-section {
+                    background: #fef3c7;
+                    border-radius: 16px;
+                    padding: 2rem;
+                    border: 2px solid #fbbf24;
+                    margin-top: 2rem;
+                    cursor: pointer;
+                }
+
+                .legal-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .legal-icon {
+                    width: 50px;
+                    height: 50px;
+                    background: #f59e0b;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    color: white;
+                }
+
+                .legal-title h3 {
+                    font-size: 1.4rem;
+                    color: #78350f;
+                    margin-bottom: 0.25rem;
+                }
+
+                .legal-content {
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.5s ease;
+                }
+
+                .legal-section.expanded .legal-content {
+                    max-height: 2000px;
+                }
+
+                .quote-box {
+                    background: white;
+                    border-left: 4px solid #f59e0b;
+                    padding: 1.2rem;
+                    margin: 1.5rem 0;
+                    border-radius: 8px;
+                }
+
+                .source {
+                    font-weight: 600;
+                    color: #92400e;
+                    margin-bottom: 0.5rem;
+                }
+
+                .quote-box .text {
+                    color: #78350f;
+                    font-style: italic;
+                    line-height: 1.6;
+                }
+
+                .legal-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    margin: 1.5rem 0;
+                }
+
+                .legal-box {
+                    background: white;
+                    padding: 1.2rem;
+                    border-radius: 8px;
+                    border: 1px solid #fbbf24;
+                }
+
+                .legal-box h4 {
+                    color: #78350f;
+                    font-size: 1.1rem;
+                    margin-bottom: 0.75rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .legal-box ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .legal-box li {
+                    padding: 0.4rem 0;
+                    padding-left: 1.3rem;
+                    position: relative;
+                    color: #92400e;
+                    font-size: 0.95rem;
+                    line-height: 1.5;
+                }
+
+                .legal-box li::before {
+                    content: "✓";
+                    position: absolute;
+                    left: 0;
+                    color: #f59e0b;
+                    font-weight: bold;
+                }
+
+                @media (max-width: 900px) {
+                    .development-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .legal-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+            
+            <script>
+                function toggleSection(sectionId) {
+                    const section = document.getElementById(sectionId);
+                    section.classList.toggle('expanded');
+                }
+
+                // All sections start collapsed by default
+                document.addEventListener('DOMContentLoaded', () => {
+                    // No sections are expanded by default
+                });
+            </script>
+        </section>
+
+        <!-- Relationships Section -->
+        <section id="Relationships" class="section">
+            <div class="container">
+                <h2>Internal and External Relationships</h2>
+                <div class="relationships-container">
+                    <div class="controls">
+                        <button class="control-btn" onclick="expandAllRelationships()">▼ Expand All</button>
+                        <button class="control-btn" onclick="collapseAllRelationships()">▲ Collapse All</button>
+                    </div>
+                    
+                    <!-- Internal Collaboration Section -->
+                    <div class="relationship-section" id="section1">
+                        <div class="section-header" onclick="toggleRelationshipSection('section1')">
+                            <div class="section-icon">🏢</div>
+                            <div class="section-title">
+                                <h3>Internal Collaboration</h3>
+                                <span class="subtitle">Strong Communication Across Teams</span>
+                            </div>
+                            <div class="collapse-icon">▼</div>
+                        </div>
+
+                        <div class="section-content-wrapper">
+                            <div class="content-block">
+                                <p>Success depends on strong communication and coordination across engineering, design, marketing, and legal teams.</p>
+                            </div>
+
+                            <div class="teams-list">
+                                <div class="team-item">
+                                    <div class="team-item-icon">⚙️</div>
+                                    <div class="team-item-info">
+                                        <h4>Engineering</h4>
+                                        <p>Technical development, system architecture, and quality assurance</p>
+                                    </div>
+                                </div>
+
+                                <div class="team-item">
+                                    <div class="team-item-icon">🎨</div>
+                                    <div class="team-item-info">
+                                        <h4>Design</h4>
+                                        <p>User experience, interface design, and product aesthetics</p>
+                                    </div>
+                                </div>
+
+                                <div class="team-item">
+                                    <div class="team-item-icon">📢</div>
+                                    <div class="team-item-info">
+                                        <h4>Marketing</h4>
+                                        <p>Brand strategy, market positioning, and customer engagement</p>
+                                    </div>
+                                </div>
+
+                                <div class="team-item">
+                                    <div class="team-item-icon">⚖️</div>
+                                    <div class="team-item-info">
+                                        <h4>Legal</h4>
+                                        <p>Compliance, intellectual property, and risk management</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="trust-benefits">
+                                <h4>🤝 Culture Built on Trust</h4>
+                                
+                                <div class="quote-box">
+                                    <div class="source">Hagel (2018):</div>
+                                    <div class="text">
+                                        Environments grounded in trust "encourage more productive friction while minimizing the types of friction that might make workgroup members hesitant to challenge and interact."
+                                    </div>
+                                </div>
+
+                                <div class="benefits-list">
+                                    <div class="benefit-item">
+                                        <div class="icon">💡</div>
+                                        <div class="text">
+                                            <strong>Question Assumptions:</strong> Teams feel safe to challenge existing ideas and processes
+                                        </div>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <div class="icon">🌈</div>
+                                        <div class="text">
+                                            <strong>Diverse Perspectives:</strong> Multiple viewpoints strengthen problem-solving
+                                        </div>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <div class="icon">🔧</div>
+                                        <div class="text">
+                                            <strong>Refine Ideas:</strong> Healthy friction enables continuous improvement
+                                        </div>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <div class="icon">🚫</div>
+                                        <div class="text">
+                                            <strong>Prevent Silos:</strong> Open communication breaks down departmental barriers
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- External Collaboration Section -->
+                    <div class="relationship-section" id="section2">
+                        <div class="section-header" onclick="toggleRelationshipSection('section2')">
+                            <div class="section-icon">🤝</div>
+                            <div class="section-title">
+                                <h3>External Collaboration</h3>
+                                <span class="subtitle">Strategic Partnerships & Governance</span>
+                            </div>
+                            <div class="collapse-icon">▼</div>
+                        </div>
+
+                        <div class="section-content-wrapper">
+                            <div class="content-block">
+                                <p>Maintaining open collaboration with external partners (suppliers, research partners, compliance experts, and investors) is essential to reducing risk and sustaining long-term alignment.</p>
+                            </div>
+
+                            <div class="partners-grid">
+                                <div class="partner-item">
+                                    <div class="icon">🏭</div>
+                                    <h4>Suppliers</h4>
+                                    <p>Hardware components and materials sourcing</p>
+                                </div>
+
+                                <div class="partner-item">
+                                    <div class="icon">🔬</div>
+                                    <h4>Research Partners</h4>
+                                    <p>Academic institutions and R&D collaboration</p>
+                                </div>
+
+                                <div class="partner-item">
+                                    <div class="icon">✅</div>
+                                    <h4>Compliance Experts</h4>
+                                    <p>Regulatory certification and testing</p>
+                                </div>
+
+                                <div class="partner-item">
+                                    <div class="icon">💰</div>
+                                    <h4>Investors</h4>
+                                    <p>Financial backing and strategic guidance</p>
+                                </div>
+                            </div>
+
+                            <div class="governance-box">
+                                <h4>🔗 Shared Governance Frameworks</h4>
+                                <p>Clear communication and shared governance frameworks help prevent misunderstandings and ensure expectations are synchronized.</p>
+                                <ul class="governance-list">
+                                    <li>
+                                        <span class="icon">📋</span>
+                                        Clear communication protocols and regular status updates
+                                    </li>
+                                    <li>
+                                        <span class="icon">🎯</span>
+                                        Aligned objectives and synchronized expectations
+                                    </li>
+                                    <li>
+                                        <span class="icon">⚠️</span>
+                                        Risk assessment and mitigation strategies
+                                    </li>
+                                    <li>
+                                        <span class="icon">📊</span>
+                                        Performance metrics and accountability measures
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stakeholder Engagement Section -->
+                    <div class="relationship-section" id="section3">
+                        <div class="section-header" onclick="toggleRelationshipSection('section3')">
+                            <div class="section-icon">📊</div>
+                            <div class="section-title">
+                                <h3>The Importance of Strong Stakeholder Engagement</h3>
+                                <span class="subtitle">Learning from the F-35 Jet Project</span>
+                            </div>
+                            <div class="collapse-icon">▼</div>
+                        </div>
+
+                        <div class="section-content-wrapper">
+                            <div class="case-study">
+                                <h4>⚠️ Case Study: F-35 Jet Project</h4>
+                                
+                                <div class="case-study-content">
+                                    <p>
+                                        The F-35 Jet Project demonstrates the risks of weak stakeholder communication where unclear reporting on costs led to misaligned procurement decisions and unrealistic delivery expectations.
+                                    </p>
+                                </div>
+
+                                <div class="lessons-grid">
+                                    <div class="lesson-item">
+                                        <h5>❌ Poor Communication</h5>
+                                        <p>Unclear cost reporting created information gaps between stakeholders</p>
+                                    </div>
+                                    <div class="lesson-item">
+                                        <h5>🎯 Misaligned Decisions</h5>
+                                        <p>Procurement choices made without complete financial visibility</p>
+                                    </div>
+                                    <div class="lesson-item">
+                                        <h5>📅 Unrealistic Expectations</h5>
+                                        <p>Delivery timelines set without stakeholder consensus</p>
+                                    </div>
+                                    <div class="lesson-item">
+                                        <h5>💸 Budget Overruns</h5>
+                                        <p>Cost escalation due to lack of transparent tracking</p>
+                                    </div>
+                                </div>
+
+                                <div class="key-quote">
+                                    <div class="source">Maley (2012):</div>
+                                    <div class="text">
+                                        "Stakeholders are not confined to the internal performing organization," reinforcing that leaders must continuously engage and inform all parties who influence project outcomes.
+                                    </div>
+                                </div>
+
+                                <div class="takeaways">
+                                    <h5>✅ Key Takeaways for HearOnly</h5>
+                                    <ul class="governance-list">
+                                        <li>
+                                            <span class="icon">📢</span>
+                                            Maintain transparent and frequent communication with all stakeholders
+                                        </li>
+                                        <li>
+                                            <span class="icon">📊</span>
+                                            Provide clear, accurate reporting on project costs and progress
+                                        </li>
+                                        <li>
+                                            <span class="icon">🤝</span>
+                                            Engage both internal and external stakeholders continuously
+                                        </li>
+                                        <li>
+                                            <span class="icon">🎯</span>
+                                            Align expectations across all parties before major decisions
+                                        </li>
+                                        <li>
+                                            <span class="icon">⚖️</span>
+                                            Recognize that all parties influencing outcomes are stakeholders
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .relationships-container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 1rem;
+                }
+
+                .controls {
+                    display: flex;
+                    gap: 0.75rem;
+                    justify-content: center;
+                    margin: 1.5rem 0;
+                    padding-bottom: 1rem;
+                    border-bottom: 2px solid #e0e7ff;
+                }
+
+                .control-btn {
+                    padding: 0.6rem 1.2rem;
+                    background: #667eea;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .control-btn:hover {
+                    background: #5568d3;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                }
+
+                /* Section Styling */
+                .relationship-section {
+                    margin-bottom: 1.25rem;
+                    border: 2px solid #e0e7ff;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    transition: all 0.3s ease;
+                }
+
+                .relationship-section:last-child {
+                    margin-bottom: 0;
+                }
+
+                .section-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 0.75rem 1rem;
+                    border-bottom: 2px solid #e0e7ff;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    background: white;
+                    user-select: none;
+                }
+
+                .section-header:hover {
+                    background: #f8fafc;
+                }
+
+                .relationship-section.collapsed .section-header {
+                    border-bottom: none;
+                }
+
+                .section-content-wrapper {
+                    max-height: 5000px;
+                    overflow: hidden;
+                    transition: max-height 0.5s ease, padding 0.3s ease;
+                    padding: 1rem;
+                }
+
+                .relationship-section.collapsed .section-content-wrapper {
+                    max-height: 0;
+                    padding: 0 1rem;
+                }
+
+                .collapse-icon {
+                    margin-left: auto;
+                    font-size: 1.2rem;
+                    transition: transform 0.3s ease;
+                    color: #667eea;
+                }
+
+                .relationship-section.collapsed .collapse-icon {
+                    transform: rotate(-90deg);
+                }
+
+                .section-icon {
+                    width: 45px;
+                    height: 45px;
+                    background: #667eea;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    color: white;
+                    flex-shrink: 0;
+                }
+
+                .section-title h3 {
+                    font-size: 1.3rem;
+                    color: #1f2933;
+                    margin-bottom: 0.15rem;
+                }
+
+                .section-title .subtitle {
+                    font-size: 0.85rem;
+                    color: #78909c;
+                }
+
+                /* Content Blocks */
+                .content-block {
+                    background: #f8fafc;
+                    border-radius: 8px;
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                    border-left: 3px solid #667eea;
+                }
+
+                .content-block p {
+                    color: #546e7a;
+                    line-height: 1.5;
+                    margin-bottom: 0;
+                    font-size: 0.9rem;
+                }
+
+                /* Teams Grid */
+                .teams-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.75rem;
+                    margin-bottom: 1rem;
+                }
+
+                .team-item {
+                    background: white;
+                    border: 2px solid #e0e7ff;
+                    border-radius: 10px;
+                    padding: 0.9rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                }
+
+                .team-item-icon {
+                    width: 40px;
+                    height: 40px;
+                    background: #667eea;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    flex-shrink: 0;
+                }
+
+                .team-item-info h4 {
+                    font-size: 0.95rem;
+                    color: #1f2933;
+                    margin-bottom: 0.2rem;
+                }
+
+                .team-item-info p {
+                    font-size: 0.8rem;
+                    color: #78909c;
+                    line-height: 1.3;
+                }
+
+                /* Quote Boxes */
+                .quote-box {
+                    background: #e8f5e9;
+                    border-left: 3px solid #4caf50;
+                    padding: 1rem;
+                    margin: 1rem 0;
+                    border-radius: 6px;
+                }
+
+                .quote-box .source {
+                    font-weight: 700;
+                    color: #2e7d32;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.85rem;
+                }
+
+                .quote-box .text {
+                    color: #1b5e20;
+                    font-style: italic;
+                    line-height: 1.5;
+                    font-size: 0.85rem;
+                }
+
+                /* Trust Benefits */
+                .trust-benefits {
+                    background: #e8f5e9;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    border: 2px solid #4caf50;
+                    margin: 1.5rem 0;
+                }
+
+                .trust-benefits h4 {
+                    color: #1b5e20;
+                    font-size: 1.05rem;
+                    margin-bottom: 0.75rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .benefits-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.75rem;
+                }
+
+                .benefit-item {
+                    background: white;
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    display: flex;
+                    gap: 0.6rem;
+                }
+
+                .benefit-item .icon {
+                    font-size: 1.2rem;
+                    flex-shrink: 0;
+                }
+
+                .benefit-item .text {
+                    color: #2e7d32;
+                    font-size: 0.8rem;
+                    line-height: 1.4;
+                }
+
+                /* External Partners */
+                .partners-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 0.75rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .partner-item {
+                    background: white;
+                    border: 2px solid #e0e7ff;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    text-align: center;
+                }
+
+                .partner-item .icon {
+                    font-size: 2rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .partner-item h4 {
+                    font-size: 0.9rem;
+                    color: #1f2933;
+                    margin-bottom: 0.4rem;
+                }
+
+                .partner-item p {
+                    font-size: 0.8rem;
+                    color: #78909c;
+                    line-height: 1.3;
+                }
+
+                /* Governance Box */
+                .governance-box {
+                    background: #e8eaf6;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    border: 2px solid #667eea;
+                    margin: 1.5rem 0;
+                }
+
+                .governance-box h4 {
+                    color: #3949ab;
+                    font-size: 1.05rem;
+                    margin-bottom: 0.75rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .governance-list {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .governance-list li {
+                    padding: 0.6rem;
+                    margin: 0.4rem 0;
+                    background: white;
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    color: #3949ab;
+                    font-size: 0.85rem;
+                }
+
+                .governance-list li .icon {
+                    font-size: 1rem;
+                    flex-shrink: 0;
+                }
+
+                /* Case Study */
+                .case-study {
+                    background: #ffebee;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    border: 2px solid #ef5350;
+                }
+
+                .case-study h4 {
+                    color: #c62828;
+                    font-size: 1.15rem;
+                    margin-bottom: 0.75rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .case-study-content {
+                    background: white;
+                    border-radius: 6px;
+                    padding: 1rem;
+                    margin-bottom: 0.75rem;
+                }
+
+                .case-study-content p {
+                    color: #d32f2f;
+                    line-height: 1.5;
+                    font-size: 0.85rem;
+                }
+
+                .lessons-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.75rem;
+                    margin: 0.75rem 0;
+                }
+
+                .lesson-item {
+                    background: white;
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    border-left: 3px solid #ef5350;
+                }
+
+                .lesson-item h5 {
+                    color: #c62828;
+                    font-size: 0.85rem;
+                    margin-bottom: 0.4rem;
+                }
+
+                .lesson-item p {
+                    color: #d32f2f;
+                    font-size: 0.8rem;
+                    line-height: 1.3;
+                }
+
+                .key-quote {
+                    background: white;
+                    border-left: 3px solid #ef5350;
+                    padding: 1rem;
+                    border-radius: 6px;
+                    margin: 0.75rem 0;
+                }
+
+                .key-quote .source {
+                    font-weight: 700;
+                    color: #c62828;
+                    margin-bottom: 0.4rem;
+                    font-size: 0.85rem;
+                }
+
+                .key-quote .text {
+                    color: #d32f2f;
+                    font-style: italic;
+                    line-height: 1.5;
+                    font-size: 0.85rem;
+                }
+
+                .takeaways {
+                    background: white;
+                    border-radius: 6px;
+                    padding: 1rem;
+                    margin-top: 1rem;
+                }
+
+                .takeaways h5 {
+                    color: #c62828;
+                    font-size: 1rem;
+                    margin-bottom: 0.75rem;
+                }
+
+                /* Responsive Design */
+                @media (max-width: 900px) {
+                    .teams-list,
+                    .benefits-list,
+                    .lessons-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .partners-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .controls {
+                        flex-direction: column;
+                        gap: 0.5rem;
+                    }
+
+                    .control-btn {
+                        width: 100%;
+                    }
+                }
+
+                @media (max-width: 600px) {
+                    .relationships-container {
+                        padding: 0.5rem;
+                    }
+
+                    .partners-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .section-header {
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        padding: 0.6rem 0.75rem;
+                    }
+
+                    .section-icon {
+                        width: 35px;
+                        height: 35px;
+                        font-size: 1.2rem;
+                    }
+
+                    .section-title h3 {
+                        font-size: 1.05rem;
+                    }
+
+                    .section-title .subtitle {
+                        font-size: 0.75rem;
+                    }
+
+                    .collapse-icon {
+                        font-size: 1rem;
+                    }
+                }
+            </style>
+
+            <script>
+                function toggleRelationshipSection(sectionId) {
+                    const section = document.getElementById(sectionId);
+                    section.classList.toggle('collapsed');
+                }
+
+                function expandAllRelationships() {
+                    document.querySelectorAll('.relationship-section').forEach(section => {
+                        section.classList.remove('collapsed');
+                    });
+                }
+
+                function collapseAllRelationships() {
+                    document.querySelectorAll('.relationship-section').forEach(section => {
+                        section.classList.add('collapsed');
+                    });
+                }
+
+                // Collapse all sections by default on page load
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelectorAll('.relationship-section').forEach(section => {
+                        section.classList.add('collapsed');
+                    });
+                });
+            </script>
         </section>
 
         <!-- Schedules Section -->
@@ -3193,171 +4019,153 @@
             <div class="container">
                 <h2>Budget & Reserves</h2>
                 <div class="card">
-                    <div class="budget-container">
-                        <div class="budget-content">
-                            <h3>Budget Phasing & Contingency</h3>
-                            <p>Budget phasing will follow milestone-based funding releases tied to defined deliverables. This approach ensures financial discipline while maintaining flexibility to adapt to project needs.</p>
-                            
-                            <div class="budget-highlight">
-                                <h4>Contingency Reserve: 10% of Total Project Costs</h4>
-                                <p>This reserve is allocated to cover:</p>
-                                <ul>
-                                    <li>Identified technical risks and challenges</li>
-                                    <li>Schedule adjustments and delays</li>
-                                    <li>Unforeseen strategic adjustments</li>
-                                    <li>Scope changes requiring additional resources</li>
-                                </ul>
-                                <p>The contingency will be managed through formal change control processes, with regular reviews to ensure appropriate allocation and utilization.</p>
-                            </div>
-                        </div>
+                    <div class="budget-content">
+                        <p>Budget phasing will follow milestone-based funding releases tied to defined deliverables.</p>
                         
-                        <div class="budget-visual">
-                            <div class="budget-chart">
-                                <div class="chart-bar" style="height: 80%; background: #4facfe;">
-                                    <span>90%<br>Base Budget</span>
-                                </div>
-                                <div class="chart-bar" style="height: 20%; background: #f6d365;">
-                                    <span>10%<br>Contingency</span>
-                                </div>
-                            </div>
-                            <div class="budget-legend">
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #4facfe;"></span>
-                                    <span>Base Budget</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #f6d365;"></span>
-                                    <span>Contingency Reserve</span>
-                                </div>
-                            </div>
+                        <div class="budget-highlight">
+                            <h4>Contingency Reserve: 10% of Total Project Costs</h4>
+                            <p>The amount should cover identified technical or schedule risks and it provides flexibility for unforeseen strategic adjustments.</p>
+                        </div>
+
+                        <div class="budget-table" style="margin-top: 2rem; overflow-x: auto;">
+                            <style>
+                                .budget-table table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    margin: 1.5rem 0;
+                                    font-size: 0.9rem;
+                                }
+                                .budget-table th {
+                                    background: #c41e1e;
+                                    color: white;
+                                    font-weight: 600;
+                                    padding: 12px;
+                                    text-align: left;
+                                    border-right: 1px solid rgba(255, 255, 255, 0.1);
+                                }
+                                .budget-table th:last-child {
+                                    border-right: none;
+                                }
+                                .budget-table td {
+                                    padding: 12px;
+                                    border-bottom: 1px solid #e5e5e5;
+                                    color: #333;
+                                }
+                                .budget-table tr:last-child td {
+                                    border-bottom: none;
+                                }
+                                .budget-table tbody tr:hover {
+                                    background: #f9f9f9;
+                                }
+                                .budget-table .subtotal-row {
+                                    background: #fce4e4;
+                                    font-weight: 600;
+                                }
+                                .budget-table .subtotal-row td {
+                                    color: #333;
+                                    border-bottom: 2px solid #c41e1e;
+                                }
+                                .budget-table .total-row {
+                                    background: #c41e1e;
+                                    color: white;
+                                    font-weight: 700;
+                                }
+                                .budget-table .total-row td {
+                                    color: white;
+                                    border-bottom: none;
+                                }
+                                .budget-table .currency {
+                                    font-family: 'Courier New', monospace;
+                                    font-weight: 500;
+                                }
+                                .budget-table .center {
+                                    text-align: center;
+                                }
+                                .budget-table .right {
+                                    text-align: right;
+                                }
+                                @media (max-width: 768px) {
+                                    .budget-table table {
+                                        font-size: 0.8rem;
+                                    }
+                                    .budget-table th, 
+                                    .budget-table td {
+                                        padding: 8px 6px;
+                                    }
+                                }
+                            </style>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Phase</th>
+                                        <th>Major Component</th>
+                                        <th class="center">Release Month</th>
+                                        <th class="right">Personnel Costs (USD)</th>
+                                        <th class="right">Non-Personnel Costs (USD)</th>
+                                        <th class="right">Total USD</th>
+                                        <th class="center">%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Initiation & Planning</strong></td>
+                                        <td>Feasibility Study, PMO setup, governance</td>
+                                        <td class="center">1</td>
+                                        <td class="right currency">525,000</td>
+                                        <td class="right currency">225,000</td>
+                                        <td class="right currency">750,000</td>
+                                        <td class="center">15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Design & Development</strong></td>
+                                        <td>System Design, Supplier engagement, Risk analysis</td>
+                                        <td class="center">7</td>
+                                        <td class="right currency">1,375,000</td>
+                                        <td class="right currency">1,125,000</td>
+                                        <td class="right currency">2,500,000</td>
+                                        <td class="center">50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Testing & Validation</strong></td>
+                                        <td>AI software, hardware pilot, prototype build, QA/testing</td>
+                                        <td class="center">12</td>
+                                        <td class="right currency">500,000</td>
+                                        <td class="right currency">500,000</td>
+                                        <td class="right currency">1,000,000</td>
+                                        <td class="center">20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Deployment & Transition</strong></td>
+                                        <td>User Training and Support, Change Management, Marketing & Launch, Go-Live Audit, small batch manufacturing</td>
+                                        <td class="center">18</td>
+                                        <td class="right currency">225,000</td>
+                                        <td class="right currency">525,000</td>
+                                        <td class="right currency">750,000</td>
+                                        <td class="center">15%</td>
+                                    </tr>
+                                    <tr class="subtotal-row">
+                                        <td colspan="5"><strong>Subtotal</strong></td>
+                                        <td class="right currency"><strong>5,000,000</strong></td>
+                                        <td class="center"><strong>100%</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Reserves</strong></td>
+                                        <td>Risk Buffer - additional 10% of the total budget</td>
+                                        <td class="center">As required</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="right currency">500,000</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="5"><strong>Total budget</strong></td>
+                                        <td class="right currency"><strong>5,500,000</strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    
-                    <style>
-                        .budget-container {
-                            display: flex;
-                            gap: 3rem;
-                            align-items: flex-start;
-                        }
-                        
-                        .budget-content {
-                            flex: 1;
-                        }
-                        
-                        .budget-content h3 {
-                            color: #2d3748;
-                            margin-top: 0;
-                            margin-bottom: 1.5rem;
-                            font-size: 1.5rem;
-                            font-weight: 600;
-                        }
-                        
-                        .budget-content p {
-                            color: #4a5568;
-                            line-height: 1.6;
-                            margin-bottom: 1.5rem;
-                        }
-                        
-                        .budget-highlight {
-                            background: #f8fafc;
-                            border-left: 4px solid #4f46e5;
-                            padding: 1.5rem;
-                            border-radius: 0 8px 8px 0;
-                            margin: 2rem 0;
-                        }
-                        
-                        .budget-highlight h4 {
-                            color: #2d3748;
-                            margin-top: 0;
-                            margin-bottom: 1rem;
-                            font-size: 1.1rem;
-                        }
-                        
-                        .budget-highlight ul {
-                            padding-left: 1.5rem;
-                            margin: 1rem 0;
-                        }
-                        
-                        .budget-highlight li {
-                            margin-bottom: 0.5rem;
-                            color: #4a5568;
-                        }
-                        
-                        .budget-visual {
-                            flex: 1;
-                            max-width: 400px;
-                            background: white;
-                            border-radius: 12px;
-                            padding: 2rem;
-                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                        }
-                        
-                        .budget-chart {
-                            display: flex;
-                            height: 300px;
-                            align-items: flex-end;
-                            gap: 1.5rem;
-                            margin-bottom: 2rem;
-                        }
-                        
-                        .chart-bar {
-                            flex: 1;
-                            border-radius: 8px 8px 0 0;
-                            display: flex;
-                            align-items: flex-end;
-                            justify-content: center;
-                            padding-bottom: 1rem;
-                            color: white;
-                            font-weight: 600;
-                            text-align: center;
-                            font-size: 0.9rem;
-                            line-height: 1.4;
-                            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-                            min-width: 80px;
-                        }
-                        
-                        .budget-legend {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 1rem;
-                        }
-                        
-                        .legend-item {
-                            display: flex;
-                            align-items: center;
-                            gap: 0.75rem;
-                        }
-                        
-                        .legend-color {
-                            width: 24px;
-                            height: 24px;
-                            border-radius: 4px;
-                            flex-shrink: 0;
-                        }
-                        
-                        @media (max-width: 1024px) {
-                            .budget-container {
-                                flex-direction: column;
-                                gap: 2rem;
-                            }
-                            
-                            .budget-visual {
-                                max-width: 100%;
-                                width: 100%;
-                            }
-                        }
-                        
-                        @media (max-width: 640px) {
-                            .budget-chart {
-                                height: 250px;
-                            }
-                            
-                            .chart-bar {
-                                min-width: 60px;
-                                font-size: 0.8rem;
-                            }
-                        }
-                    </style>
                 </div>
             </div>
         </section>

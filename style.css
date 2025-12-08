@@ -44,7 +44,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1rem;
@@ -146,7 +146,7 @@ section:nth-child(even) {
     cursor: pointer;
     transition: var(--transition);
     border: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .btn-primary {
@@ -186,7 +186,7 @@ section:nth-child(even) {
 }
 
 .logo {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary);
@@ -1059,7 +1059,7 @@ section:nth-child(even) {
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 0.5rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .metric-label {
