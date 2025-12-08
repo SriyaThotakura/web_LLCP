@@ -4,14 +4,14 @@
     --primary-light: #3b82f6;
     --primary-dark: #1d4ed8;
     --text: #1f2937;
-    --text-light: #6b7280;
-    --background: #f9fafb;
+    --text-light: #4b5563;
+    --background: rgba(255, 255, 255, 0.9);
     --card-bg: #ffffff;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --border-radius: 12px;
     --transition: all 0.3s ease;
-    
+
     /* New hero section variables */
     --bg: #f0f4f8;
     --bg-secondary: #ffffff;
@@ -36,7 +36,9 @@ html {
 body {
     font-family: 'IBM Plex Sans', sans-serif;
     color: var(--text);
-    background-color: var(--background);
+    background: linear-gradient(135deg, #f0f4f8 0%, #e6f0ff 50%, #f8f9ff 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
     line-height: 1.6;
     overflow-x: hidden;
 }
